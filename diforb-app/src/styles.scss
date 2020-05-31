@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./assets/styles/mixins.scss";
+@import "./assets/styles/variables.scss";
+@import "./assets/styles/angular-material-custom.scss";
+// @import "./assets//styles/jquery-ui-custom.scss";
+
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font: 400 12px/1.4 'Play',  Arial,  Tahoma,  Verdana, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+

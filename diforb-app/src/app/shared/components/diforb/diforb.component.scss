@@ -1,0 +1,208 @@
+@import "../../../../assets/styles/mixins.scss";
+@import "../../../../assets/styles/variables.scss";
+
+.container {
+    display: flex;
+    background: black radial-gradient(ellipse at top, $light-blue-color-rgba 0%, $dark-blue-color-rgba 70%);
+    height: 100%;
+
+    .player {
+
+        // border: 1px solid red;
+        margin: auto;
+        min-width: $min-width-player; min-height: $min-width-player;
+        width: $size;  height: $size;
+        border-radius: 50%;
+        border: 1px solid black;
+        
+        &__holder {
+            width: inherit; height: inherit;
+          
+
+            &__inner {
+                width: inherit; height: inherit;
+                position: relative;
+
+                &::before {
+                    margin: 10% 10%;
+                    position: absolute;
+                    content: '';
+                    display: block;
+                    width: 80%; height: 80%;
+                    border-radius: 50%;
+                    background-color: rgba(255, 255, 255, .1);
+                }
+               
+            }
+        }
+
+        &__content {
+            max-width: 100%; max-height: 100%;
+            width: 100%; height: 100%;
+            border: 1px solid green;
+
+            tr {
+                border: 1px solid yellow;
+                height: $size / 10;
+
+                td {
+                    border: 1px solid beige;
+                    text-align: center;
+                    width: $size-third;
+                }
+            }
+
+            &__wave {
+                width: $size-third;
+                &__container {
+                    width: $size-third; height: $size-third;
+                    border-radius: 50%;
+                    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.07);
+                    
+                    &__inner {
+
+                        width: 100%; height: 100%;
+                        border-radius:50%;
+                        padding:9px;
+                        border:2px solid rgba(255, 255, 255, 1);
+                        box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.06);
+                        
+
+                        &__holder {
+                            display: flex;
+                            width: 100%; height: 100%;
+                            border-radius: 50%;
+                            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2) inset, 0 0 10px 10px #5ec7e1 inset;
+                            @include blueprintGrid;
+
+                            h1 {
+                                 margin: auto;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+            &__slider-range {
+
+                .slider-range-top {
+                    margin: auto;
+                    width: 45vh; height: 100%;
+                    transform: rotate(-0.8deg);
+                    @include backgroundOptional(
+                        url("../../../../assets/img/libs/range-middle-top.svg"), 45vh, 0, 3.6vh
+                    );
+
+                    &__handler {
+                        @extend %extension-handler;
+                        top: 8.6vh;
+                        left: -0.4vh;
+                        @include backgroundOptional(
+                            url("../../../../assets/img/libs/slider_holder.svg")
+                        );
+                    }
+                }
+
+                .slider-range-left {
+                    height: 100%;
+                    position: relative;
+                    top: 5vh;
+                    transform: rotate(1.5deg);
+                    @include backgroundOptional(
+                        url("../../../../assets/img/libs/range-left-top.svg"),
+                        100% 100%, -1vh
+                    );
+                   
+                    &__inner {
+                        height: inherit;
+                        // padding: 1.4vh;
+                        @include backgroundOptional(
+                            url("../../../../assets/img/libs/range-left-top-grad.svg"),
+                            100% 88%,  -0.4vh, 1.9vh
+                        );
+                        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%)
+                    }
+
+                    &__handler {
+                        @include backgroundOptional(url("../../../../assets/img/libs/slider_holder.svg"));
+                        @extend %extension-handler;
+                        top: -3.8vh;
+                        left: -5.8vh;
+                    }
+                }
+
+                .slider-range-right {
+                    height: 100%;
+                    position: relative;
+                    top: 5vh;
+                    transform: rotate(-1.7deg);
+                    @include backgroundOptional(
+                        url("../../../../assets/img/libs/range-right-top.svg"),
+                        100% 100%, 0.5vh
+                    );
+                    
+                    &__inner {
+                        height: inherit;
+                        padding: 1.4vh;
+                        @include backgroundOptional(
+                            url("../../../../assets/img/libs/range-right-top-grad.svg"),
+                            100% 91%,  0.8vh,  0.9vh
+                        );
+                    }
+
+                    &__handler {
+                        @include backgroundOptional(url("../../../../assets/img/libs/slider_holder.svg"));
+                        @extend %extension-handler;
+                        left: 5.3vh;
+                        top: -4.4vh;
+                    }
+                }
+            }
+
+            &__download {
+
+                .btn {
+                    position: relative;
+                    top: 0vh;
+                    @extend %extension-btn;
+                }
+            }
+        }
+    }
+}
+
+%extension-handler {
+    position: relative;
+    width: $size-handle; height: $size-handle;
+    display: inline-block;
+    cursor: pointer;
+}
+
+%extension-btn {
+    display: inline-block;
+    padding: 1vh 4vh;
+    color: $btn-color;
+    font-size: 2vh;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius:3vh;
+    background: $btn-background-rgba;
+    border-bottom: .5vh solid $btn-color-bottom;
+    cursor: pointer;
+
+    &[disabled] {
+
+        color:$btn-color-disabled;
+        background-color: transparent;
+
+        &:hover {
+            color: $btn-color-disabled-hover;
+            border-bottom: .6vh solid $btn-color-bottom;
+            text-shadow: 0 0 10px $btn-color-shadow-disabled;
+        }
+    }
+   
+    
+    
+}

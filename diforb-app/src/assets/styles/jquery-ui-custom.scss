@@ -1,0 +1,24 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+// .ui-slider {
+//     border: 1px solid black;
+
+//     &.slider-range-top {
+//         margin: auto;
+//         width: $size-wave; height: 100%;
+//         @include backgroundOptional(url("../img/libs/range-middle-top.svg"), $size-wave);
+//     }
+    
+
+//     &-range {
+//         border: 1px solid red;
+//     }
+
+//     &-handle {
+//         border: 1px solid green;
+//         width: $size-handle; height: $size-handle;
+//         display: inline-block;
+//          @include backgroundOptional(url('../img/libs/slider_holder.svg'))
+//     }
+// }
