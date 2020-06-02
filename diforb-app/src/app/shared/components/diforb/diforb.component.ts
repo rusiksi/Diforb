@@ -10,7 +10,7 @@ declare const jQuery;
 })
 export class DiforbComponent implements OnInit, AfterContentInit {
 	
-	public title: string = 'App Library';
+	public title: string = 'Interface';
 
 	constructor() { }
 
@@ -20,47 +20,53 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 	ngAfterContentInit(): void {
 		
-		jQuery('.slider-range-top').slider({
-			orientation: 'horyzontal',
-			range: 'min',
-			min: 0,
-			max: 100,
-			value: 0,
-			disabled: false,
-			create: function(){
-				// console.log('Create', this)
-			},
-			slide: function (event: Event, slide: SlideRanger) {
-				jQuery(this).find('.slider-range-top__handler').css({
-					transform: getTranslateHoryzontal(slide.value)
-				});
-			}
-		});
+		// jQuery('.slider-range-top').slider({
+		// 	orientation: 'horyzontal',
+		// 	range: 'min',
+		// 	min: 0,
+		// 	max: 100,
+		// 	value: 0,
+		// 	disabled: false,
+		// 	create: function (event: Event, ui: SlideRanger){
+		// 		// console.log('Create', this)
+		// 	},
+		// 	slide: function (event: Event, ui: SlideRanger) {
+		// 		// jQuery(this).find('.slider-range-top__handler').css({
+		// 		// 	transform: getTranslateHoryzontal(slide.value)
+		// 		// });
+		// 	}
+		// });
 
-		jQuery('.slider-range-left').slider({
-			orientation: 'vertical',
-			range: 'min',
-			min: 0,
-			max: 100,
-			value: 0,
-			disabled: false,
-			create: function () {
-				console.log('Create', this)
-			},
-			slide: function (event: Event, slide: SlideRanger) {
-				console.log(100 - slide.value);
-				let clipValue = easing(100 - slide.value);
+		// jQuery('.slider-range-left').slider({
+		// 	orientation: 'vertical',
+		// 	range: 'min',
+		// 	min: 0,
+		// 	max: 100,
+		// 	value: 0,
+		// 	disabled: false,
+		// 	create: function () {
+		// 		// jQuery(this).find('.ui-slider-handle').css('margin-bottom', '5%')
+		// 	},
+		// 	slide: function (event: Event, ui: SlideRanger) {
+		// 		// let radius = (917 / 2),
+		// 		// 	step = Math.PI / 400,
+		// 		// 	angle = (ui.value < 15) ? 0 : (ui.value < 92 ) ? (ui.value - 15) * step : 77 * step,
+		// 		// 	x = radius - radius * Math.cos(angle);
+		// 		// console.log(ui.value, angle, x);
 				
-				console.log("Real value: ", 100 - slide.value)
-				console.log("Linear: ", clipValue)
-				jQuery(this).find('.slider-range-left__handler').css({
-					transform: getTranslateVertycal(slide.value),
-				});
-				jQuery(this).find('.slider-range-left__inner').css({
-					clipPath: 'polygon(0 ' + clipValue + '%,  100% ' + clipValue + '%,  100% 100%, 0 100%)'
-				});
-			}
-		})
+		// 		// if (ui.value < 6) {
+		// 		// 	jQuery(ui.handle).css('margin-bottom', (5 - ui.value) + '%')
+		// 		// }  else if (ui.value > 88) {
+		// 		// 	// jQuery(ui.handle).css('margin-bottom', (88 - ui.value) + '%');
+		// 		// } else {
+		// 		// 	jQuery(ui.handle).css('margin-bottom', '0%')
+		// 		// }
+		// 		// jQuery(ui.handle).css('transform', 'translateX(' + x + 'px)')
+		// 	},
+		// 	change: function (event: Event, ui: SlideRanger) {
+				
+		// 	}
+		// })
 	}
 
 }

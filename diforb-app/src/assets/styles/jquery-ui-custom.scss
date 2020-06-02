@@ -1,24 +1,34 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import 'variables';
+@import 'mixins';
 
-// .ui-slider {
-//     border: 1px solid black;
-
-//     &.slider-range-top {
-//         margin: auto;
-//         width: $size-wave; height: 100%;
-//         @include backgroundOptional(url("../img/libs/range-middle-top.svg"), $size-wave);
-//     }
+.ui-slider {
+    background-color: red;
+    height: 100%;
+   
     
 
-//     &-range {
-//         border: 1px solid red;
-//     }
+    &-range {
+    background-color: rebeccapurple;
+    }
 
-//     &-handle {
-//         border: 1px solid green;
-//         width: $size-handle; height: $size-handle;
-//         display: inline-block;
-//          @include backgroundOptional(url('../img/libs/slider_holder.svg'))
-//     }
-// }
+    &-handle {
+        border: 1px solid green;
+        width: $size-handle; height: $size-handle;
+        display: inline-block;
+        background-color: royalblue;
+        cursor: pointer;
+        // @include backgroundOptional(url('../img/libs/slider_holder.svg'))
+        // background-image: url("../img/libs/slider_holder.svg");
+    }
+
+    &.slider-range-left {
+
+        border: 1px solid green;
+    }
+
+     &.slider-range-top {
+        margin: auto;
+        width: $size-third; height: 100%;
+        // @include backgroundOptional(url("../img/libs/range-middle-top.svg"), $size-wave);
+     }
+}

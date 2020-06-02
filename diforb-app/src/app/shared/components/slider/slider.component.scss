@@ -1,0 +1,15 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    .left {}
+
+    .right {}
+
+    .top {
+        width: 130%;
+        margin: 0 -15%;
+        height: auto;
+    }
+}

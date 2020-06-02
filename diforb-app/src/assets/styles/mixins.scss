@@ -20,23 +20,26 @@
                             -4px 0px;
 }
 
-@mixin backgroundOptional($url, $size: 100%, $x: 0vh, $y: 0vh) {
+@mixin backgroundOptional(
+    $url, $size: 100%, $pos: 0 0
+) {
     background-image: $url;
     background-repeat: no-repeat;
     background-size: $size;
-    background-position-x: $x;
-    background-position-y: $y;
+    background-position: $pos;
+    background-origin: content-box;
 }
 
 @mixin dualBackgroundOptional(
     $url_1, $url_2,
-    $sizeX_1: 100%, $sizeY_1: 100%,
-    $sizeX_2: 100%, $sizeY_2: 100% 
+    $size1: 100% 100%, $size2: 100% 100%,
+    $pos1: 0 0, $pos2: 0 0 
 ) {
     background-image: $url_1, $url_2;
     background-repeat: no-repeat;
-    background-size:    $sizeX_1 $sizeY_1,
-                        $sizeX_2 $sizeY_2;
+    background-size:    $size1, $size2;
+    background-position: $pos1, $pos2;
+    background-origin: content-box;
 }
 
 

@@ -2,31 +2,66 @@
     <div class="player">
         <div class="player__holder">
             <div class="player__holder__inner">
-                <table class="player__content">
+                <table class="column-table">
                     <tr>
-                        <td colspan="3" class="player__content__slider-range">
-                            <div class="slider-range-top">
-                                <div class="slider-range-top__handler"></div>
+                        <td>First Column</td>
+                    </tr>
+                </table>
+                <table class="column-table middle">
+                    <tr>
+                        <td class="slider-top">
+                            <app-slider mode="top"></app-slider>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="player__view">
+                                <div class="player__view__inner">
+                                    <div class="player__view__inner__holder">
+                                        <h1>{{title}}</h1>
+                                    </div>
+                                </div>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="player__content__slider-range">
-                            <div class="slider-range-left">
-                                <div class="slider-range-left__inner"></div>
-                                <div class="slider-range-left__handler"></div>
+                        <td>
+                            <div>
+                                <button>Play</button>
+                            </div>
+                            <div>
+                                <button>Download</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <table class="column-table">
+                    <tr>
+                        <td>Third Column</td>
+                    </tr>
+                </table>
+                <!-- <table class="player__content">
+                    <tr>
+                        <td></td>
+                        <td class="player__content__slider-range">
+                            <div class="slider-range-top">
+                                <app-slider mode="top"></app-slider>
                             </div>
                         </td>
                         <td></td>
-                        <td rowspan="2" class="player__content__slider-range">
-                            <div class="slider-range-right">
-                                <div class="slider-range-right__inner"></div>
-                                <div class="slider-range-right__handler"></div>
-                            </div> 
-                        </td>
                     </tr>
                     <tr>
-                        <td rowspan="2" class="player__content__wave">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="player__content__slider-range">
+                            <div class="slider-range-left">
+                                <app-slider mode="left"></app-slider>
+                            </div>
+                        </td>
+                        <td class="player__content__wave">
                             <div class="player__content__wave__container">
                                 <div class="player__content__wave__container__inner">
                                     <div class="player__content__wave__container__inner__holder">
@@ -35,23 +70,31 @@
                                 </div>
                             </div>
                         </td>
+                        <td class="player__content__slider-range">
+                            <div class="slider-range-right">
+                                <app-slider mode="right"></app-slider>
+                            </div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="player__content__pitch__left">Pitch A</td>
-
+                        <td></td>
                         <td class="player__content__pitch__right">Pitch B</td>
                     </tr>
+                   
                     <tr>
                         <td class="player__content__reverb__left">Rever A</td>
                         <td class="player__content__play">Play</td>
                         <td class="player__content__reverb__right">Rever B</td>
                     </tr>
                     <tr>
-                        <td colspan="3" class="player__content__download">
-                            <div class="btn" disabled>Download</div>
+                        <td></td>
+                        <td class="player__content__download">
+                            Download
                         </td>
+                        <td></td>
                     </tr>
-                </table>
+                </table> -->
             </div>
         </div>
     </div>

@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DiforbComponent } from './shared/components/diforb/diforb.component';
 import { SharedModule } from './shared/shared.module';
+import { SliderComponent } from './shared/components/slider/slider.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DiforbComponent
+    DiforbComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

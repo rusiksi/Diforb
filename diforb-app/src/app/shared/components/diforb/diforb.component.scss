@@ -1,29 +1,41 @@
-@import "../../../../assets/styles/mixins.scss";
-@import "../../../../assets/styles/variables.scss";
+@import 'variables';
+@import 'mixins';
+
+$min-size: 623px;
+$min-width-player: 623px;
+$size: 80vh;
+$size-third: $size / 3;
+$size-handle: $size / 35;
 
 .container {
     display: flex;
     background: black radial-gradient(ellipse at top, $light-blue-color-rgba 0%, $dark-blue-color-rgba 70%);
+    // background-color: black;
     height: 100%;
 
     .player {
+        border: 1px solid white;
 
-        // border: 1px solid red;
         margin: auto;
-        min-width: $min-width-player; min-height: $min-width-player;
-        width: $size;  height: $size;
+        width: $min-size;
+        height: $min-size;
         border-radius: 50%;
-        border: 1px solid black;
+        
+
+        @media (min-width: $screen-md-min) {
+            width: $size;
+            height: $size;
+        }
         
         &__holder {
             width: inherit; height: inherit;
-          
 
             &__inner {
                 width: inherit; height: inherit;
                 position: relative;
 
-                &::before {
+                // Разметка для разработки (временно)
+                &:before {
                     margin: 10% 10%;
                     position: absolute;
                     content: '';
@@ -36,139 +48,122 @@
             }
         }
 
-        &__content {
-            max-width: 100%; max-height: 100%;
-            width: 100%; height: 100%;
+        .column-table {
             border: 1px solid green;
+            float: left;
+            width: 33.333%;
+            height: 100%;
+            border-collapse: collapse;
 
-            tr {
-                border: 1px solid yellow;
-                height: $size / 10;
+            &.middle {
+                
+                tr {
 
-                td {
-                    border: 1px solid beige;
-                    text-align: center;
-                    width: $size-third;
-                }
-            }
+                    td {
+                        height: 33.333%;
+                        border: 1px solid blue;
 
-            &__wave {
-                width: $size-third;
-                &__container {
-                    width: $size-third; height: $size-third;
-                    border-radius: 50%;
-                    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.07);
-                    
-                    &__inner {
-
-                        width: 100%; height: 100%;
-                        border-radius:50%;
-                        padding:9px;
-                        border:2px solid rgba(255, 255, 255, 1);
-                        box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.06);
-                        
-
-                        &__holder {
-                            display: flex;
-                            width: 100%; height: 100%;
-                            border-radius: 50%;
-                            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2) inset, 0 0 10px 10px #5ec7e1 inset;
-                            @include blueprintGrid;
-
-                            h1 {
-                                 margin: auto;
-                            }
+                        &.slider-top {
+                            padding-top: 17%;
                         }
                     }
-                    
-                }
-            }
-
-            &__slider-range {
-
-                .slider-range-top {
-                    margin: auto;
-                    width: 45vh; height: 100%;
-                    transform: rotate(-0.8deg);
-                    @include backgroundOptional(
-                        url("../../../../assets/img/libs/range-middle-top.svg"), 45vh, 0, 3.6vh
-                    );
-
-                    &__handler {
-                        @extend %extension-handler;
-                        top: 8.6vh;
-                        left: -0.4vh;
-                        @include backgroundOptional(
-                            url("../../../../assets/img/libs/slider_holder.svg")
-                        );
-                    }
-                }
-
-                .slider-range-left {
-                    height: 100%;
-                    position: relative;
-                    top: 5vh;
-                    transform: rotate(1.5deg);
-                    @include backgroundOptional(
-                        url("../../../../assets/img/libs/range-left-top.svg"),
-                        100% 100%, -1vh
-                    );
-                   
-                    &__inner {
-                        height: inherit;
-                        // padding: 1.4vh;
-                        @include backgroundOptional(
-                            url("../../../../assets/img/libs/range-left-top-grad.svg"),
-                            100% 88%,  -0.4vh, 1.9vh
-                        );
-                        clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%)
-                    }
-
-                    &__handler {
-                        @include backgroundOptional(url("../../../../assets/img/libs/slider_holder.svg"));
-                        @extend %extension-handler;
-                        top: -3.8vh;
-                        left: -5.8vh;
-                    }
-                }
-
-                .slider-range-right {
-                    height: 100%;
-                    position: relative;
-                    top: 5vh;
-                    transform: rotate(-1.7deg);
-                    @include backgroundOptional(
-                        url("../../../../assets/img/libs/range-right-top.svg"),
-                        100% 100%, 0.5vh
-                    );
-                    
-                    &__inner {
-                        height: inherit;
-                        padding: 1.4vh;
-                        @include backgroundOptional(
-                            url("../../../../assets/img/libs/range-right-top-grad.svg"),
-                            100% 91%,  0.8vh,  0.9vh
-                        );
-                    }
-
-                    &__handler {
-                        @include backgroundOptional(url("../../../../assets/img/libs/slider_holder.svg"));
-                        @extend %extension-handler;
-                        left: 5.3vh;
-                        top: -4.4vh;
-                    }
-                }
-            }
-
-            &__download {
-
-                .btn {
-                    position: relative;
-                    top: 0vh;
-                    @extend %extension-btn;
                 }
             }
         }
+
+        &__view {
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.07);
+
+            &__inner {
+                width: 100%; height: 100%;
+                border-radius:50%;
+                padding:9px;
+                border:2px solid rgba(255, 255, 255, 1);
+                box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.06);
+
+                &__holder {
+                    display: flex;
+                    width: 100%; height: 100%;
+                    border-radius: 50%;
+                    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2) inset, 0 0 10px 10px #5ec7e1 inset;
+                    @include blueprintGrid;
+
+                    h1 {
+                        margin: auto;
+                    }
+                }
+            }
+        }
+
+        // &__content {
+
+        //     width: $min-size;
+        //     height: $min-size;
+
+        //     @media (min-width: $screen-md-min) {
+        //         width: $size;
+        //         height: $size;
+        //     }
+            
+
+        //     tr {
+        //         border: 1px solid yellow;
+                
+
+        //         td {
+        //             border: 1px solid beige;
+        //             text-align: center;
+        //             width: 33.333%;
+
+        //             &.player__content__wave { 
+        //                 height: 33.333%;
+        //             }
+        //         }
+        //     }
+
+        //     &__wave {
+        //         // width: $size-third;
+        //         &__container {
+        //             height: 100%;
+        //             border-radius: 50%;
+        //             box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.07);
+                    
+        //             &__inner {
+
+        //                 width: 100%; height: 100%;
+        //                 border-radius:50%;
+        //                 padding:9px;
+        //                 border:2px solid rgba(255, 255, 255, 1);
+        //                 box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.06);
+                        
+
+        //                 &__holder {
+        //                     display: flex;
+        //                     width: 100%; height: 100%;
+        //                     border-radius: 50%;
+        //                     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2) inset, 0 0 10px 10px #5ec7e1 inset;
+        //                     @include blueprintGrid;
+
+        //                     h1 {
+        //                          margin: auto;
+        //                     }
+        //                 }
+        //             }
+                    
+        //         }
+        //     }
+
+        //     &__download {
+
+        //         .btn {
+        //             position: relative;
+        //             top: 0vh;
+        //             @extend %extension-btn;
+        //         }
+        //     }
+        // }
     }
 }
 
