@@ -56,18 +56,33 @@ $size-handle: $size / 35;
             border-collapse: collapse;
 
             &.middle {
+                text-align: center;
                 
                 tr {
 
                     td {
                         height: 33.333%;
-                        border: 1px solid blue;
 
                         &.slider-top {
-                            padding-top: 17%;
+                            padding-top: 13%;
                         }
                     }
                 }
+            }
+
+            &.left, &.right {
+
+                td {
+                    vertical-align:  top;
+                }
+            }
+
+            &.left {
+                text-align: left;
+            }
+
+            &.right {
+                text-align: right;
             }
         }
 
@@ -97,63 +112,10 @@ $size-handle: $size / 35;
             }
         }
 
-        // &__content {
-
-        //     width: $min-size;
-        //     height: $min-size;
-
-        //     @media (min-width: $screen-md-min) {
-        //         width: $size;
-        //         height: $size;
-        //     }
-            
-
-        //     tr {
-        //         border: 1px solid yellow;
-                
-
-        //         td {
-        //             border: 1px solid beige;
-        //             text-align: center;
-        //             width: 33.333%;
-
-        //             &.player__content__wave { 
-        //                 height: 33.333%;
-        //             }
-        //         }
-        //     }
-
-        //     &__wave {
-        //         // width: $size-third;
-        //         &__container {
-        //             height: 100%;
-        //             border-radius: 50%;
-        //             box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.07);
-                    
-        //             &__inner {
-
-        //                 width: 100%; height: 100%;
-        //                 border-radius:50%;
-        //                 padding:9px;
-        //                 border:2px solid rgba(255, 255, 255, 1);
-        //                 box-shadow: 0 0 20px 20px rgba(0, 0, 0, 0.06);
-                        
-
-        //                 &__holder {
-        //                     display: flex;
-        //                     width: 100%; height: 100%;
-        //                     border-radius: 50%;
-        //                     box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2) inset, 0 0 10px 10px #5ec7e1 inset;
-        //                     @include blueprintGrid;
-
-        //                     h1 {
-        //                          margin: auto;
-        //                     }
-        //                 }
-        //             }
-                    
-        //         }
-        //     }
+        .pitch {
+            height: 30%;
+        }
+       
 
         //     &__download {
 

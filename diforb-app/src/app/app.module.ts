@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { DiforbComponent } from './shared/components/diforb/diforb.component';
 import { SharedModule } from './shared/shared.module';
 import { SliderComponent } from './shared/components/slider/slider.component';
+import { PitchComponent } from './shared/components/pitch/pitch.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DiforbComponent,
-    SliderComponent
+    SliderComponent,
+    PitchComponent
   ],
   imports: [
     BrowserModule,

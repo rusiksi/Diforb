@@ -2,9 +2,21 @@
     <div class="player">
         <div class="player__holder">
             <div class="player__holder__inner">
-                <table class="column-table">
+                <table class="column-table left">
                     <tr>
-                        <td>First Column</td>
+                        <td>
+                            <app-slider mode="left-top"></app-slider>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pitch">
+                                <app-pitch></app-pitch>
+                            </div>
+                            <div class="reverb">
+                                <app-slider mode="left-bottom"></app-slider>
+                            </div>
+                        </td>
                     </tr>
                 </table>
                 <table class="column-table middle">
@@ -35,9 +47,21 @@
                         </td>
                     </tr>
                 </table>
-                <table class="column-table">
+                <table class="column-table right">
                     <tr>
-                        <td>Third Column</td>
+                        <td>
+                            <app-slider mode="right-top"></app-slider>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="pitch">
+                                <app-pitch></app-pitch>
+                            </div>
+                            <div class="reverb">
+                                <app-slider mode="right-bottom"></app-slider>
+                            </div>
+                        </td>
                     </tr>
                 </table>
                 <!-- <table class="player__content">

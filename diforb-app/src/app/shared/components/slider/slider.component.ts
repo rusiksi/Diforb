@@ -1,20 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgModel } from '@angular/forms';
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss']
+	selector: 'app-slider',
+	templateUrl: './slider.component.html',
+	styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
 
-  @Input('mode') mode: NgModel;
+	@Input('mode') mode: Mode = null;
 
-  constructor() { }
+	constructor() { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
 }
 
-type Mode =  'top' | 'left' | 'right'
+type Mode = 'top' | 'left-top' | 'right-top' | 'left-bottom' | 'right-bottom';
