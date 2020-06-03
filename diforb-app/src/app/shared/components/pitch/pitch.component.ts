@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input } from '@angular/core';
 
 declare const jQuery;
 
@@ -9,57 +9,69 @@ declare const jQuery;
 })
 export class PitchComponent implements OnInit, AfterContentInit {
 
+	public size: number = null;
+
 	@ViewChild('inputRef', {static: true}) input: ElementRef;
 
-	constructor() { }
+	@Input('mode') mode: Mode;
+
+	constructor(private elementRef: ElementRef) { }
 
 	ngOnInit(): void {
 	}
 
 	ngAfterContentInit(): void {
+		this.initKnob();
+	}
 
+	private initKnob = (): void => {
+		
+		let side = this.elementRef.nativeElement.getBoundingClientRect().height,
+			sideCanvas = side * 0.56 + 'px',
+			mode = this.mode;
+
+		this.size = side;
+		
 		jQuery(this.input.nativeElement).knob({
 			min: 0,
 			max: 10,
-			width: 40,
-			height: 40,
+			width: sideCanvas,
+			height: sideCanvas,
 			cursor: true,
 			lineCap: 'round',
 			bgColor: 'none',
 			fgColor: '#919395',
-			thickness: .3,
+			thickness: .1,
 			displayInput: false,
 			angleOffset: -125,
 			angleArc: 250,
 			step: 1,
 			release: function (v: number) {
-				console.log(arguments)
-				// if (v == 5) {
-				// 	scope.pitchControls[0].trigger('configure', {
-				// 		fgColor: '#919395'
-				// 	})
-				// } else {
-				// 	scope.pitchControls[0].trigger('configure', {
-				// 		fgColor: '#2eca75'
-				// 	})
-				// }
-				// if (v < 6 && v > 4) {
-				// 	scope.pitchControls[0].trigger('configure', {
-				// 		step: 1
-				// 	});
-				// } else {
-				// 	scope.pitchControls[0].trigger('configure', {
-				// 		step: 0.1
-				// 	});
-				// }
-				// scope.pitchLeftChange(v);
+				this.$.trigger('configure', {
+					fgColor: (v == 5) ? '#919395' : '#2eca75',
+					step: (v < 6 && v > 4) ? 1 : 0.1
+				});
 			},
 			change: function (v: number) {
-				// scope.pitchLeftChange(v)
-				console.log(arguments)
+				// console.log(arguments)
+				
+			},
+			draw: function() {
+				(mode == 'left') ? this.$c.css('margin-left', '13%') : this.$c.css('margin-right', '31%');
+				this.$c.css({
+					borderRadius: '50%',
+					background:'#e8e8e1',
+					borderTop: '2px solid rgba(255, 255, 255, 0.57',
+					marginTop: '11%',
+					width: sideCanvas,
+					height: sideCanvas,
+				});
+
+				
 			}
-		})
-		
+		});
 	}
 
 }
+
+type Mode = "left" | "right";

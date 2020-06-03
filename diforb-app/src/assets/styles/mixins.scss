@@ -21,13 +21,17 @@
 }
 
 @mixin backgroundOptional(
-    $url, $size: 100%, $pos: 0 0
+    $url,
+    $size: 100%,
+    $pos: 0 0,
+    $repeat: no-repeat,
+    $origin: content-box
 ) {
     background-image: $url;
-    background-repeat: no-repeat;
+    background-repeat: $repeat;
     background-size: $size;
     background-position: $pos;
-    background-origin: content-box;
+    background-origin: $origin;
 }
 
 @mixin dualBackgroundOptional(

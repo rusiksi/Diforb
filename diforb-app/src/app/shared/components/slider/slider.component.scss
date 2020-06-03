@@ -7,18 +7,18 @@
         height: auto;
     }
 
-    .left-top {
+    .left-top, .right-top {
         width: 50%;
-        margin-left: 21%;
         margin-top: 61%;
-        margin-bottom: -70%;
+        margin-bottom: -61%;
+    }
+
+    .left-top {
+        margin-left: 21%;
     }
 
     .right-top {
-        width: 50%;
         margin-right: 21%;
-        margin-top: 61%;
-        margin-bottom: -70%;
     }
 
     .top {

@@ -80,7 +80,7 @@
 	<a:midPointStop  offset="0.5" style="stop-color:#5A5A5A;stop-opacity:0"/>
 	<a:midPointStop  offset="1" style="stop-color:#5A5A5A;stop-opacity:0.2"/>
 </linearGradient>
-<path fill="url(#SVGID_1_)" d="M53.634,21.803c1.186,2.804,1.843,5.875,1.843,9.099c0,13.153-10.893,23.817-24.327,23.817
+<path style="position: absolute" fill="url(#SVGID_1_)" d="M53.634,21.803c1.186,2.804,1.843,5.875,1.843,9.099c0,13.153-10.893,23.817-24.327,23.817
 	c-7.7,0-14.56-3.506-19.015-8.974c-0.558-0.685-0.193,0.325-0.193,0.325l24.826,44.901L77.45,66.973L53.634,21.803z"/>
 <g>
 </g>

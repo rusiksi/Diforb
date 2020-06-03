@@ -28,6 +28,7 @@ a {
 $url-slider-holder: 'assets/img/libs/slider_holder.svg';
 $url-slider-left-top: 'assets/img/libs/range-left-top.svg';
 $url-slider-left-top-grad: 'assets/img/libs/range-left-top-grad.svg';
+$url-pitch: 'assets/img/interface/pitch_scalesst.svg';
 
 // .ui-slider {
    
@@ -72,4 +73,9 @@ $url-slider-left-top-grad: 'assets/img/libs/range-left-top-grad.svg';
 //         height: 100%;
 //         // @include backgroundOptional(url("../img/libs/range-middle-top.svg"), $size-wave);
 //     }
+// }
+
+// .pitch-control {
+//     background-image: url($url-pitch);
+//     background-size: 100% auto;
 // }
