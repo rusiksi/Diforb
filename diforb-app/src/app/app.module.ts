@@ -8,20 +8,23 @@ import { SharedModule } from './shared/shared.module';
 import { SliderComponent } from './shared/components/slider/slider.component';
 import { PitchComponent } from './shared/components/pitch/pitch.component';
 
+// import { WebAudioApiService } from './webaudioapi/webaudio.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DiforbComponent,
-    SliderComponent,
-    PitchComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		DiforbComponent,
+		SliderComponent,
+		PitchComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		SharedModule
+	],
+	providers: [
+		// WebAudioApiService
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

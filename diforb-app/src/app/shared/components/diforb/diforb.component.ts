@@ -1,18 +1,25 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Easing } from '@app/shared/utilites/easing';
+import { WebAudioApiService } from '@app/webaudioapi/webaudio.service';
 
 declare const jQuery;
 
 @Component({
 	selector: 'app-diforb',
 	templateUrl: './diforb.component.html',
-	styleUrls: ['./diforb.component.scss']
+	styleUrls: ['./diforb.component.scss'],
+	providers: [WebAudioApiService]
 })
 export class DiforbComponent implements OnInit, AfterContentInit {
 	
 	public title: string = 'Interface';
 
-	constructor() { }
+	constructor(private webAudioApiService: WebAudioApiService) {
+		
+		// console.log('[Diforb component constructor]:');
+		// console.table(this.webAudioApiService);
+		// console.time(this.webAudioApiService);
+	}
 
 	ngOnInit(): void {
 		// console.log(jQuery);
