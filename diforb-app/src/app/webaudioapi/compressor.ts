@@ -8,8 +8,7 @@ export class Compressor {
     private compressor: DynamicsCompressorNode;
 
     constructor(){
-
-        Object.setPrototypeOf(this, new WebApiBase);
+        
         this.compressor = this.Context.createDynamicsCompressor();
         this.compressor.threshold.value = -1.4;
         this.compressor.knee.value = 12;
@@ -22,3 +21,5 @@ export class Compressor {
         this.Instance = this.compressor;
     }
 }
+
+Object.setPrototypeOf(Compressor.prototype, new WebApiBase);

@@ -20,8 +20,6 @@ export class Side {
 
     constructor(libGainNode: GainNode) {
 
-        Object.setPrototypeOf(this, new WebApiBase);
-
         this.LibGainNode = libGainNode;
         this.GainNode = this.Context.createGain();
         this.Convolver = new Convolver();
@@ -116,3 +114,5 @@ export class Side {
         }
     }
 }
+
+Object.setPrototypeOf(Side.prototype, new WebApiBase);

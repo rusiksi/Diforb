@@ -25,8 +25,7 @@ export class Library {
     private soundNamePrefix = "";
 
     constructor(name) {
-        Object.setPrototypeOf(this, new WebApiBase)
-        
+
         this.Name = name;
         
         this.GainNode = this.Context.createGain();
@@ -125,4 +124,6 @@ export class Library {
         */
     }
 }
+
+Object.setPrototypeOf(Library.prototype, new WebApiBase)
 

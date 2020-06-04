@@ -1,3 +1,5 @@
+import { convolverSoundsBasePath } from './const';
+
 export class BufferLoader {
 
     public static instance: BufferLoader;
@@ -27,33 +29,35 @@ export class BufferLoader {
 
 
     loadLeft(url, callBackFunc) {
-        this.loadBuffer(url, null, callBackFunc);
+        this.loadBuffer(url, callBackFunc);
     }
 
     loadReverb(callBackFunc) {
-        this.loadBuffer('src/sounds/reverb/irHall.ogg', this.reverSounds["Hall"],
+        this.loadBuffer(convolverSoundsBasePath + 'irHall.ogg', // this.reverSounds["Hall"],
             () => {
-                this.loadBuffer('src/sounds/reverb/noise.ogg', this.reverSounds["Noise"],
-                    function () {
-                        this.loadBuffer('src/sounds/reverb/glass-hit.ogg', this.reverSounds["Glass_hit"],
-                            callBackFunc); this.reverSound = this.reverSounds["Hall"]
+                this.loadBuffer(convolverSoundsBasePath + 'noise.ogg', //this.reverSounds["Noise"],
+                    () =>  {
+                        this.loadBuffer(convolverSoundsBasePath + 'glass-hit.ogg', // this.reverSounds["Glass_hit"],
+                            callBackFunc);
+                        this.reverSound = this.reverSounds["Hall"]
                     });
             });
     }
 
    loadOneReverb(url, callBackFunc) {
-        this.loadBuffer(url, this.reverSound, callBackFunc);
+        this.loadBuffer(url, callBackFunc);
     }
 
     loadHallReverb(callBackFunc) {
-        this.loadBuffer('src/sounds/reverb/irHall.ogg', this.reverSound, callBackFunc);
+        this.loadBuffer('src/sounds/reverb/irHall.ogg', callBackFunc);
     }
 
     loadRight(url, callBackFunc) {
-        this.loadBuffer(url, this.Right, callBackFunc);
+        this.loadBuffer(url, callBackFunc);
     }
 
-    loadBuffer(url, rever, callBackFunc) {
+    loadBuffer(url, callBackFunc) {
+        
         var userTokenLoc = "Bearer " + this.userToken;
         var request = new XMLHttpRequest();
         request.open("GET", url, true);
@@ -61,26 +65,24 @@ export class BufferLoader {
         this.onload = callBackFunc;
         request.setRequestHeader("Authorization", userTokenLoc);
 
-        var loader = this;
+        // var loader = this;
 
-        request.onload = function () {
+        request.onload = () => {
             // Asynchronously decode the audio file data in request.response
-            loader.context.decodeAudioData(
-                request.response,
-                function (buffer) {
+            this.context.decodeAudioData(request.response, (buffer) => {
                     if (!buffer) {
                         alert('error decoding file data: ' + url);
                         return;
                     }
-                    loader.onload(buffer);
+                    this.onload(buffer);
                 },
-                function (error) {
+                (error) => {
                     console.error('decodeAudioData error', error);
                 }
             );
         }
 
-        request.onerror = function () {
+        request.onerror = () => {
             //alert('BufferLoader: XHR error');
         }
 

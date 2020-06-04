@@ -28,8 +28,6 @@ export class Sound {
 
     constructor(sideGainNode: GainNode, libGainNode?: GainNode) {
 
-        Object.setPrototypeOf(this, new WebApiBase);
-
         this.GainNode = this.Context.createGain();
         this.SideGainNode = sideGainNode;
         this.GainNode.connect(this.SideGainNode);
@@ -53,7 +51,7 @@ export class Sound {
 
         this.IsReading = true;
 
-        this.BufferLoader.loadBuffer(url, null, (buffer) => {
+        this.BufferLoader.loadBuffer(url, (buffer) => {
             // window.activeSpinnerSound();
             this.Files[this.CurrenReadingSound].buffer = buffer;
             // window.activeDurationSound = function () {
@@ -176,6 +174,8 @@ export class Sound {
         }
     }
 }
+
+Object.setPrototypeOf(Sound.prototype, new WebApiBase);
 
 
 class Image {

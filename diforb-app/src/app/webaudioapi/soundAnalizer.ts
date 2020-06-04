@@ -11,8 +11,6 @@ export class SoundAnalizer {
 
     constructor() {
 
-        Object.setPrototypeOf(this, new WebApiBase);
-
         this.Analyser = this.Context.createAnalyser();
         this.Analyser.fftSize = 1024;
         this.Analyser.smoothingTimeConstant = 0.5;
@@ -37,4 +35,6 @@ export class SoundAnalizer {
     }
 
 }
+
+Object.setPrototypeOf(SoundAnalizer.prototype, new WebApiBase);
 

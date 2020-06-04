@@ -1,9 +1,11 @@
-import { WebApiBase } from './webapibase'
+import { WebApiBase } from './webapibase';
+import { ConvolverBuffer } from './convolverBuffer';
 
 export class Convolver {
 
     Context: AudioContext;
-    Buffers;
+    Buffers: { Stadium: ConvolverBuffer, Hall: ConvolverBuffer, Room: ConvolverBuffer };
+    FillBuffers;
 
     Source = null;
     Volume = 1.0;
@@ -13,12 +15,9 @@ export class Convolver {
     BufferName = false;
     Instance = null;
 
-    muted: boolean;
+    private muted: boolean;
 
     constructor(){
-
-        Object.setPrototypeOf(this, new WebApiBase);
-
         //Init
         this.Instance = this.Context.createConvolver();
         this.GainNode = this.Context.createGain();
@@ -60,3 +59,5 @@ export class Convolver {
         }
     }
 }
+
+Object.setPrototypeOf(Convolver.prototype, new WebApiBase);
