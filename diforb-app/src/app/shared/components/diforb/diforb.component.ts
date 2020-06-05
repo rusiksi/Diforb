@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { Easing } from '@app/shared/utilites/easing';
 import { WebAudioApiService } from '@app/webaudioapi/webaudio.service';
+import { Sound } from '@app/webaudioapi/sound';
 
 declare const jQuery;
 
@@ -16,9 +17,28 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 	constructor(private webAudioApiService: WebAudioApiService) {
 		
-		// console.log('[Diforb component constructor]:');
-		// console.table(this.webAudioApiService);
-		// console.time(this.webAudioApiService);
+		console.log('[Diforb component constructor]:');
+		console.table(this.webAudioApiService);
+
+		// В самом начале
+		this.webAudioApiService.SetLibrary('[LIBRARY]: ' + this.title);
+		this.webAudioApiService.AddLeftSound('[Left Side]');
+		this.webAudioApiService.AddRightSound('[Right Side]');
+
+		// 1. устанавливаем Prefix. Why?
+		this.webAudioApiService.SetSoundNamePrefix('Test');
+
+		let libSideLeft = this.webAudioApiService.library.LeftSide,
+			libSideRight = this.webAudioApiService.library.RightSide;
+
+		let soundLeft: Sound = libSideLeft.Sounds['[Left Side]'];
+
+		console.log(soundLeft);
+
+		soundLeft.AddFiles("", [{ id: "wildecho.wav" }]);
+		soundLeft.Read();
+
+		// 2. получаем список файлов
 	}
 
 	ngOnInit(): void {
@@ -74,6 +94,10 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 				
 		// 	}
 		// })
+	}
+
+	onPlay = () => {
+		this.webAudioApiService.library.Play();
 	}
 
 }

@@ -1,5 +1,6 @@
 import { WebApiBase } from './webapibase';
 import { BufferLoader } from './bufferLoader';
+import { convolverSoundsBasePath } from './const';
 
 export class Sound {
 
@@ -34,23 +35,26 @@ export class Sound {
     }
 
     Read = () => {
+        
         if (this.CurrenReadingSound != null &&
             this.CurrenReadingSound >= this.Files.length - 1) {
             this.IsReading = false;
+            
             if (this.IsPlaying) {
                 this.Stop();
                 this.Play();
             }
             return;
         }
-        this.CurrenReadingSound = this.CurrenReadingSound == null ? 0 :
-            this.CurrenReadingSound + 1;
-        var url = this.BaseFilePath + "/" + this.Files[this.CurrenReadingSound].id;
+        this.CurrenReadingSound = this.CurrenReadingSound == null ? 0 : this.CurrenReadingSound + 1;
+
+        // var url = this.BaseFilePath + "/" + this.Files[this.CurrenReadingSound].id;
+        var url = convolverSoundsBasePath + this.Files[this.CurrenReadingSound].id;
 
         // var currentSoundInst = this;
 
         this.IsReading = true;
-
+       
         this.BufferLoader.loadBuffer(url, (buffer) => {
             // window.activeSpinnerSound();
             this.Files[this.CurrenReadingSound].buffer = buffer;

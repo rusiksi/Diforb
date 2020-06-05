@@ -2,6 +2,7 @@ import { WebApiBase } from './webapibase';
 import { Side } from './side';
 import { Compressor } from './compressor';
 import { SoundAnalizer } from './soundAnalizer';
+import { BufferLoader } from './bufferLoader';
 
 export class Library {
 
@@ -21,6 +22,8 @@ export class Library {
     CrossFadeValue = 1;
     RenderedBuffer = null;
     SoundAnalizer: SoundAnalizer;
+
+    BufferLoader: BufferLoader;
 
     private soundNamePrefix = "";
 
@@ -103,7 +106,7 @@ export class Library {
 
     Zip = () => { }
 
-   SetCrossfade = (val) => {
+    SetCrossfade = (val) => {
         this.CrossFadeValue = val;
 
         if (val > 0 && val <= 0.5) {
@@ -122,6 +125,10 @@ export class Library {
         this.LeftSide.SetCrossFade(Math.cos(this.CrossFadeValue * 0.5 * Math.PI));
         this.RightSide.SetCrossFade(Math.cos((1.0 - this.CrossFadeValue) * 0.5 * Math.PI));
         */
+    }
+
+    GetResourse(url, callBackFunc) {
+        this.BufferLoader.loadBuffer(url, callBackFunc);
     }
 }
 

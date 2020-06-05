@@ -57,7 +57,6 @@ export class BufferLoader {
     }
 
     loadBuffer(url, callBackFunc) {
-        
         var userTokenLoc = "Bearer " + this.userToken;
         var request = new XMLHttpRequest();
         request.open("GET", url, true);
