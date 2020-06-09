@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, Input, Output,  HostListener, ElementRef, AfterContentChecked, EventEmitter } from '@angular/core';
+import { Component, OnInit, AfterContentInit, Input, Output,  HostListener, ElementRef, AfterContentChecked, EventEmitter, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 declare const jQuery;
@@ -11,7 +11,10 @@ declare const jQuery;
 export class SliderComponent implements OnInit, AfterContentInit, AfterContentChecked {
 
 	@Input('mode') mode: ModeSlider = null;
-	@Output('change') changedVolume: EventEmitter<number> = new EventEmitter();;
+
+	@Output('change') changedVolume: EventEmitter<number> = new EventEmitter();
+
+	// @ViewChild('clipPath', { static: true }) clipPath: ElementRef;
 
 	public isGrab = false;
 	
@@ -19,7 +22,7 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	private volume = 0;
 	private min = 0;
 	private max = 100;
-	private svgRect: ClientRect;
+	private svgElement: Element;
 	private heightGrad: number = null;
 	private stepGrad: number = null;
 	private handlerRef: Element = null;
@@ -29,6 +32,9 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	private stepAngle = (0.3 * Math.PI) / 100;
 	private angle = this.startAngle;
 	private radius = 240;
+
+	private startPosClipPath = 195;
+	private elemClipPath: Element = null;
 
 
 	@HostListener('window:mouseup', ['$event'])
@@ -47,18 +53,21 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	}
 
 	ngAfterContentChecked(): void {
-		let children = (this.elem.nativeElement as Element).children,
-			regex = /translate\(\s?(?<x>\d+),\s?(?<y>\d+)\)/;
+		let children = (this.elem.nativeElement as Element).children;
 
-		if (children.length && !this.svgRect) {
-			let sliderGrad = children[0].querySelector('.slider-grad');
+		if (children.length && !this.svgElement) {
+			this.svgElement = children[0];
+
+			let regex = /translate\(\s?(?<x>\d+),\s?(?<y>\d+)\)/;
+			let sliderGrad = this.svgElement.querySelector('.slider-grad');
+			
 
 			if (sliderGrad) {
-				this.heightGrad = children[0].querySelector('.slider-grad').getBoundingClientRect().height;
+				this.heightGrad = this.svgElement.querySelector('.slider-grad').getBoundingClientRect().height;
 				this.stepGrad = this.heightGrad / 100;
 			}
-			
-			let handler = children[0].querySelector('.handler');
+
+			let handler = this.svgElement.querySelector('.handler');
 			if (handler && !this.handlerRef) {
 				this.handlerRef = handler;
 				let match = this.handlerRef.getAttribute('transform').match(regex);
@@ -67,23 +76,23 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 					y: +match.groups.y
 				}
 			}
+
+			this.elemClipPath = (this.elem.nativeElement as Element).querySelector('.clip-path-rect');
+			this.elemClipPath && this.elemClipPath.setAttribute('y', String(this.startPosClipPath));
+			console.log(this.startPosClipPath);
+
 		}
-		
 	}
 
-	onGrabHandler(event: MouseEvent): void {
+	onGrabHandler = (event: MouseEvent): void => {
 		this.isGrab = true;
-		let handlerRect = (event.target as SVGCursorElement).getBoundingClientRect();
-		console.log(handlerRect);
-
 	}
 
-	onMove(event: MouseEvent): void {
+	onMove = (event: MouseEvent): void => {
 		if (this.isGrab) {
 			
 			let dif = this.heightGrad - event.offsetY,
 				proef = Math.floor(dif / this.stepGrad) + 7;
-
 			
 			if (proef >= this.max) proef = this.max;
 			if (proef <= this.min) proef = this.min;
@@ -96,51 +105,29 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 			let  X = this.radius * Math.cos(this.angle),
 				deltaX = this.radius - X;
 
-			x = x + deltaX;
+			switch (this.mode) {
+				case 'left-top': {
+					x = x + deltaX;
+					break;
+				}
+				case 'right-top': {
+					x = x - deltaX;
+					break;
+				}
+			}	
+				
 
 			if (this.volume > 95) {
-				x = 78, y = 8;
+				if (this.mode == 'left-top') x = 78, y = 8;
+				else if (this.mode == 'right-top') x = 11, y = 8;
 			}
 
 			this.handlerRef.setAttribute('transform', `translate(${x}, ${y})`);
+			this.elemClipPath.setAttribute('y', String(y));
 			
 			this.changedVolume.emit(this.volume);
 		}
 	}
-
-	private sliderInit(): void {
-		jQuery('.slider-range-left').slider({
-			orientation: 'vertical',
-			range: 'min',
-			min: 0,
-			max: 100,
-			value: 0,
-			disabled: false,
-			create: function () {
-				// jQuery(this).find('.ui-slider-handle').css('margin-bottom', '5%')
-			},
-			slide: function (event: Event, ui: SlideRanger) {
-				// let radius = (917 / 2),
-				// 	step = Math.PI / 400,
-				// 	angle = (ui.value < 15) ? 0 : (ui.value < 92 ) ? (ui.value - 15) * step : 77 * step,
-				// 	x = radius - radius * Math.cos(angle);
-				// console.log(ui.value, angle, x);
-
-				// if (ui.value < 6) {
-				// 	jQuery(ui.handle).css('margin-bottom', (5 - ui.value) + '%')
-				// }  else if (ui.value > 88) {
-				// 	// jQuery(ui.handle).css('margin-bottom', (88 - ui.value) + '%');
-				// } else {
-				// 	jQuery(ui.handle).css('margin-bottom', '0%')
-				// }
-				// jQuery(ui.handle).css('transform', 'translateX(' + x + 'px)')
-			},
-			change: function (event: Event, ui: SlideRanger) {
-
-			}
-		})
-	}
-
 }
 
 type ModeSlider = 'top' | 'left-top' | 'right-top' | 'left-bottom' | 'right-bottom';

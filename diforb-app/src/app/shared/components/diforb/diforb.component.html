@@ -5,7 +5,7 @@
                 <table class="column-table left">
                     <tr>
                         <td>
-                            <app-slider mode="left-top" (change)="changedLeftVolume($event)"></app-slider>
+                            <app-slider mode="left-top" (change)="changedVolume($event, 'left-top')"></app-slider>
                         </td>
                     </tr>
                     <tr>
@@ -50,7 +50,7 @@
                 <table class="column-table right">
                     <tr>
                         <td>
-                            <app-slider mode="right-top"></app-slider>
+                            <app-slider mode="right-top" (change)="changedVolume($event, 'right-top')"></app-slider>
                         </td>
                     </tr>
                     <tr>

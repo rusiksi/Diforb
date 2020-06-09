@@ -104,8 +104,9 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 		doc.head.appendChild(link);
 	}
 
-	public changedLeftVolume = (value: number): void => {
-		this.soundLeft.SetVolume(value);
+	public changedVolume = (value: number, type: string): void => {
+		if (type == 'left-top') this.soundLeft.SetVolume(value);
+		else if (type == 'right-top') this.soundRight.SetVolume(value);
 	}
 
 }
