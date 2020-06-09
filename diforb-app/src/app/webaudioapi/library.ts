@@ -53,6 +53,7 @@ export class Library {
             SoundsCount: 0,
             Stoped: 0
         }
+        console.log(this);
     }
 
     

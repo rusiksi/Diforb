@@ -13,8 +13,6 @@ export class BufferLoader {
     userToken: string;
     Stack = [];
 
-    private onload: Function;
-
     constructor(context: AudioContext, uToken: string){
 
         this.context = context;
@@ -57,23 +55,23 @@ export class BufferLoader {
     }
 
     loadBuffer(url, callBackFunc) {
-        var userTokenLoc = "Bearer " + this.userToken;
-        var request = new XMLHttpRequest();
-        request.open("GET", url, true);
-        request.responseType = "arraybuffer";
-        this.onload = callBackFunc;
-        request.setRequestHeader("Authorization", userTokenLoc);
+        let request = new XMLHttpRequest();
 
-        // var loader = this;
+        request.open('GET', url, true);
+        request.responseType = 'arraybuffer';
 
         request.onload = () => {
+            console.log('Request onload callback =>>>>>>>>>>>')
+            console.log(request.response);
             // Asynchronously decode the audio file data in request.response
             this.context.decodeAudioData(request.response, (buffer) => {
+                    console.log('Decode audio data =>>>>>>>>>>>');
+                    console.log(buffer);
                     if (!buffer) {
                         alert('error decoding file data: ' + url);
                         return;
                     }
-                    this.onload(buffer);
+                    callBackFunc(buffer);
                 },
                 (error) => {
                     console.error('decodeAudioData error', error);

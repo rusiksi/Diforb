@@ -5,7 +5,7 @@
                 <table class="column-table left">
                     <tr>
                         <td>
-                            <app-slider mode="left-top"></app-slider>
+                            <app-slider mode="left-top" (change)="changedLeftVolume($event)"></app-slider>
                         </td>
                     </tr>
                     <tr>
@@ -30,7 +30,7 @@
                             <div class="player__view">
                                 <div class="player__view__inner">
                                     <div class="player__view__inner__holder">
-                                        <h1>{{title}}</h1>
+                                        <h1>{{title | uppercase}}</h1>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                     <tr>
                         <td>
                             <div>
-                                <button (click)="onPlay()">Play</button>
+                                <button (click)="onPlay()">{{isPlaying ? 'Stop' : 'Play'}}</button>
                             </div>
                             <div>
                                 <button>Download</button>

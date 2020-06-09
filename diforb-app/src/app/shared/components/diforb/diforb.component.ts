@@ -1,7 +1,11 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterContentInit } from '@angular/core';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Easing } from '@app/shared/utilites/easing';
 import { WebAudioApiService } from '@app/webaudioapi/webaudio.service';
 import { Sound } from '@app/webaudioapi/sound';
+// import { AngularFirestore } from '@angular/fire/firestore';
+// import { AngularFireStorage } from '@angular/fire/storage';
+import { map } from 'rxjs/operators';
 
 declare const jQuery;
 
@@ -14,11 +18,22 @@ declare const jQuery;
 export class DiforbComponent implements OnInit, AfterContentInit {
 	
 	public title: string = 'Interface';
+	public isPlaying = false;
 
-	constructor(private webAudioApiService: WebAudioApiService) {
+	private soundLeft: Sound = null;
+	private soundRight: Sound = null;	
+
+	constructor(
+		// firestore: AngularFirestore,
+		// storage: AngularFireStorage,
+		private webAudioApiService: WebAudioApiService,
+		@Inject(DOCUMENT) doc: Document
+	) {
 		
 		console.log('[Diforb component constructor]:');
-		console.table(this.webAudioApiService);
+		// console.table(this.webAudioApiService);
+
+		this.setIconsFont(doc);
 
 		// В самом начале
 		this.webAudioApiService.SetLibrary('[LIBRARY]: ' + this.title);
@@ -30,15 +45,20 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 		let libSideLeft = this.webAudioApiService.library.LeftSide,
 			libSideRight = this.webAudioApiService.library.RightSide;
+		
 
-		let soundLeft: Sound = libSideLeft.Sounds['[Left Side]'];
+		this.soundLeft = libSideLeft.Sounds['[Left Side]'],
+		this.soundRight = libSideRight.Sounds['[Right Side]'];
 
-		console.log(soundLeft);
-
-		soundLeft.AddFiles("", [{ id: "wildecho.wav" }]);
-		soundLeft.Read();
-
-		// 2. получаем список файлов
+		let baseSoundUrl = 'libraries/Cats-N-Dogs/';	
+		this.soundLeft.AddFiles("", [{ id: baseSoundUrl + 'Cats/Meow/CatsDogs_Cats_Meow_Meow_01.wav' }]);
+		this.soundLeft.Read();
+		this.soundLeft.SetVolume(0)
+		
+		this.soundRight.AddFiles("", [{ id: baseSoundUrl + 'Dogs/Big/CatsDogs_Dogs_Big_Big_01.wav' }]);
+		this.soundRight.Read();
+		this.soundRight.SetVolume(0);
+		
 	}
 
 	ngOnInit(): void {
@@ -64,67 +84,31 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 		// 	}
 		// });
 
-		// jQuery('.slider-range-left').slider({
-		// 	orientation: 'vertical',
-		// 	range: 'min',
-		// 	min: 0,
-		// 	max: 100,
-		// 	value: 0,
-		// 	disabled: false,
-		// 	create: function () {
-		// 		// jQuery(this).find('.ui-slider-handle').css('margin-bottom', '5%')
-		// 	},
-		// 	slide: function (event: Event, ui: SlideRanger) {
-		// 		// let radius = (917 / 2),
-		// 		// 	step = Math.PI / 400,
-		// 		// 	angle = (ui.value < 15) ? 0 : (ui.value < 92 ) ? (ui.value - 15) * step : 77 * step,
-		// 		// 	x = radius - radius * Math.cos(angle);
-		// 		// console.log(ui.value, angle, x);
-				
-		// 		// if (ui.value < 6) {
-		// 		// 	jQuery(ui.handle).css('margin-bottom', (5 - ui.value) + '%')
-		// 		// }  else if (ui.value > 88) {
-		// 		// 	// jQuery(ui.handle).css('margin-bottom', (88 - ui.value) + '%');
-		// 		// } else {
-		// 		// 	jQuery(ui.handle).css('margin-bottom', '0%')
-		// 		// }
-		// 		// jQuery(ui.handle).css('transform', 'translateX(' + x + 'px)')
-		// 	},
-		// 	change: function (event: Event, ui: SlideRanger) {
-				
-		// 	}
-		// })
+		
 	}
 
 	onPlay = () => {
-		this.webAudioApiService.library.Play();
+		this.isPlaying = !this.isPlaying;
+		this.isPlaying ? 
+		this.webAudioApiService.library.Play() :
+			this.webAudioApiService.library.Stop();
+	}
+
+	private setIconsFont(doc: Document): void {
+		let link = doc.createElement('link');
+
+		link.setAttribute('href', 'assets/styles/icons.css');
+		link.setAttribute('type', 'text/css');
+		// link.setAttribute('rel', 'stylesheet');
+
+		doc.head.appendChild(link);
+	}
+
+	public changedLeftVolume = (value: number): void => {
+		this.soundLeft.SetVolume(value);
 	}
 
 }
 
-function getTranslateHoryzontal(value: number) {
-	let mid = (50 - value),
-		x = -(mid / 4.5),
-		y = Math.tan(Math.abs(mid / 50));
-	return 'translate('+ x + 'vh,' + y + 'vh' +')';
-}
 
-function getTranslateVertycal(value: number, radius = 44) {
-	let angle = -value / Math.PI / (radius + 1.5);
-	let x = radius - radius * Math.cos(angle),
-		y = radius * Math.sin(angle) * 1.04;
-	return 'translate(  '+ x +'vh , '+ y +'vh )'
-}
 
-function easing(value: number): number {
-	if (value > 85) return value - 10;
-	else if (value <= 85 && value > 40) return value - 5;
-	else if (value <= 40 && value > 15) return value;
-	else if (value <= 15 && value > 5) return value + 5;
-	return value + 10;
-}
-
-interface SlideRanger {
-	handle: Element,
-	value: number
-}

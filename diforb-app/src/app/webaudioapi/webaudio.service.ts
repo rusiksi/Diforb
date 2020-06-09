@@ -19,8 +19,8 @@ export class WebAudioApiService {
         this.audioCtxt = new AudioContext();
         //---- Init BASE parameters for Audio API
         WebApiBase.prototype.Context = this.audioCtxt;
-        WebApiBase.prototype.BasePath = "src/Sounds";
-        WebApiBase.prototype.BaseFilePath = DiforbConstans.baseApiUrl + '/api/file/bufferbyid';
+        // WebApiBase.prototype.BasePath = "src/Sounds";
+        // WebApiBase.prototype.BaseFilePath = DiforbConstans.baseApiUrl + '/api/file/bufferbyid';
 
         //--- Create Buffer Loader
         WebApiBase.prototype.BufferLoader = new BufferLoader(this.audioCtxt, AuthService.authentication.token);
@@ -72,7 +72,7 @@ export class WebAudioApiService {
             });
         };
 
-        Convolver.prototype.FillBuffers();
+        // Convolver.prototype.FillBuffers();
 
 		//--- End of Convolver base sounds
         return this;

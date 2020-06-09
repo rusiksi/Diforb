@@ -24,7 +24,7 @@ export class Sound {
     IsMuted = false;
     IsPlaying = false;
     IsReading = false;
-    Volume = 1;
+    Volume = 0;
     CrossFadeValue = 1;
 
     constructor(sideGainNode: GainNode, libGainNode?: GainNode) {
@@ -35,7 +35,6 @@ export class Sound {
     }
 
     Read = () => {
-        
         if (this.CurrenReadingSound != null &&
             this.CurrenReadingSound >= this.Files.length - 1) {
             this.IsReading = false;
@@ -50,6 +49,7 @@ export class Sound {
 
         // var url = this.BaseFilePath + "/" + this.Files[this.CurrenReadingSound].id;
         var url = convolverSoundsBasePath + this.Files[this.CurrenReadingSound].id;
+        // var url = this.Files[this.CurrenReadingSound].id;
 
         // var currentSoundInst = this;
 
@@ -112,7 +112,7 @@ export class Sound {
 
         // Connect to Sound Gain Node
         this.GainNode.gain.value = this.IsMuted ? 0 : this.Volume;
-        this.Source.onended = function () {
+        this.Source.onended = () => {
             this.Playing.Stoped++;
             this.IsPlaying = false;
             if (this.Playing.Stoped >= this.Playing.SoundsCount) {
@@ -160,8 +160,8 @@ export class Sound {
     }
 
     SetVolume = (val) => {
-        this.GainNode.gain.value = val;
-        //this.Volume = val;
+        // this.GainNode.gain.value = val;
+        this.Volume = val * 0.02;
     }
 
     Mute = () => {

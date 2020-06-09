@@ -5,6 +5,14 @@
 
     svg {
         height: auto;
+        position: relative;
+        z-index: 1;
+
+        .handler {
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+        }
     }
 
     .left-top, .right-top {
