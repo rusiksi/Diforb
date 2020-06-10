@@ -6,26 +6,26 @@ $min-width-player: 623px;
 $size: 80vh;
 $size-third: $size / 3;
 $size-handle: $size / 35;
-$url-pattern: '../../../../assets/img/interface/player_pattern.png';
+$url-pattern: '../../../../assets/img/png/player_pattern.png';
+$url-shadow: '../../../../assets/img/png/circle-shadow.png';
 
 .container {
     display: flex;
     background: black radial-gradient(ellipse at top, $light-blue-color-rgba 0%, $dark-blue-color-rgba 70%);
-    // background-color: black;
     height: 100%;
 
     .player {
-        border: 1px solid white;
-
+        z-index: 1;
+        position: relative;
         margin: auto;
-        width: $min-size;
-        height: $min-size;
+        width: $min-size;  height: $min-size;
         border-radius: 50%;
+
+        @include whitePrintGrad;
         
 
         @media (min-width: $screen-md-min) {
-            width: $size;
-            height: $size;
+            width: $size; height: $size;
         }
         
         &__holder {
@@ -36,14 +36,24 @@ $url-pattern: '../../../../assets/img/interface/player_pattern.png';
                 position: relative;
 
                 // Разметка для разработки (временно)
+                // &:before {
+                //     margin: 10% 10%;
+                //     position: absolute;
+                //     display: block;
+                //     width: 80%; height: 80%;
+                //     border-radius: 50%;
+                //     content: '';
+                //     background: rgba(255, 255, 255, .9)
+                // }
+
                 &:before {
-                    margin: 10% 10%;
+                    margin: 2% 2%;
                     position: absolute;
-                    content: '';
                     display: block;
-                    width: 80%; height: 80%;
+                    width: 96%; height: 96%;
                     border-radius: 50%;
-                    background-color: rgba(255, 255, 255, .1);
+                    content: '';
+                    @include greyPrintGrad;
                 }
                 
                 &:after {
@@ -128,50 +138,85 @@ $url-pattern: '../../../../assets/img/interface/player_pattern.png';
         .pitch {
             height: 30%;
         }
-       
 
-        //     &__download {
+        .button {
+            cursor: pointer;
 
-        //         .btn {
-        //             position: relative;
-        //             top: 0vh;
-        //             @extend %extension-btn;
-        //         }
-        //     }
-        // }
+            &__play {
+                position: relative;
+                display: inline-block;
+                width: 25%;
+                border-radius:50%;
+                background: #e8e8e1;
+                box-shadow: 0 0 0 2px rgba(0, 0, 0, .2);
+
+                &:after {
+                    content: "";
+                    display: block;
+                    padding-top: 100%;
+                }
+
+                [class^=icon] {
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-top: 2px;
+                    margin-left: 2px;
+                    transform: translate(-50%, -50%);
+                    color: $btn-color;
+                    font-size: 3vh;
+                }
+
+                .icon-pause {
+                    text-shadow:0 0 23px #66ec06;
+                }
+            }
+
+            &__download {
+                display: inline-block;
+                padding: 1vh 4vh;
+                color: $btn-color;
+                font-size: 2vh;
+                font-weight: 700;
+                text-transform: uppercase;
+                border-radius:3vh;
+                background: $btn-background-rgba;
+                border-bottom: .5vh solid $btn-color-bottom;
+                
+
+                &[disabled] {
+                    color: $btn-color-disabled;
+                    background-color: transparent;
+
+                &:hover {
+                        color: $btn-color-disabled-hover;
+                        border-bottom: .6vh solid $btn-color-bottom;
+                        text-shadow: 0 0 10px $btn-color-shadow-disabled;
+                    }
+                }
+            }
+        }
     }
-}
 
-%extension-handler {
-    position: relative;
-    width: $size-handle; height: $size-handle;
-    display: inline-block;
-    cursor: pointer;
+    .shadow {
+        z-index: 0;
+        position: absolute;
+        left: 50%; top: 50%;
+        
+        width: $min-size;
+        height: $min-size / 2;
+        background: url($url-shadow) no-repeat;
+        transform: translate(-33%, 7%);
+
+        @media (min-width: $screen-md-min) {
+            width: $size;
+            height: $size / 2;
+        }
+    }
 }
 
 %extension-btn {
-    display: inline-block;
-    padding: 1vh 4vh;
-    color: $btn-color;
-    font-size: 2vh;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius:3vh;
-    background: $btn-background-rgba;
-    border-bottom: .5vh solid $btn-color-bottom;
-    cursor: pointer;
-
-    &[disabled] {
-
-        color:$btn-color-disabled;
-        background-color: transparent;
-
-        &:hover {
-            color: $btn-color-disabled-hover;
-            border-bottom: .6vh solid $btn-color-bottom;
-            text-shadow: 0 0 10px $btn-color-shadow-disabled;
-        }
-    }
+    
    
     
     

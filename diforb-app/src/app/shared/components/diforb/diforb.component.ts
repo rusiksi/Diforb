@@ -97,9 +97,9 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 	private setIconsFont(doc: Document): void {
 		let link = doc.createElement('link');
 
-		link.setAttribute('href', 'assets/styles/icons.css');
+		link.setAttribute('href', 'assets/libs/css/icons/Diforb_ui/style.css');
 		link.setAttribute('type', 'text/css');
-		// link.setAttribute('rel', 'stylesheet');
+		link.setAttribute('rel', 'stylesheet');
 
 		doc.head.appendChild(link);
 	}

@@ -1,5 +1,6 @@
 <div class="container">
     <div class="player">
+        
         <div class="player__holder">
             <div class="player__holder__inner">
                 <table class="column-table left">
@@ -39,10 +40,13 @@
                     <tr>
                         <td>
                             <div>
-                                <button (click)="onPlay()">{{isPlaying ? 'Stop' : 'Play'}}</button>
+                                <div class="button button__play" (click)="onPlay()">
+                                    <!-- {{isPlaying ? 'Stop' : 'Play'}} -->
+                                    <span [ngClass]="isPlaying ? 'icon-pause' : 'icon-play'"></span>
+                                </div>
                             </div>
                             <div>
-                                <button>Download</button>
+                                <div class="button button__download">Download</div>
                             </div>
                         </td>
                     </tr>
@@ -67,4 +71,5 @@
             </div>
         </div>
     </div>
+    <div class="shadow"></div>
 </div>
