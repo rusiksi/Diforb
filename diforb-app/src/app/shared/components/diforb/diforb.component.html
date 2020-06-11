@@ -1,75 +1,114 @@
-<div class="container">
-    <div class="player">
-        
-        <div class="player__holder">
-            <div class="player__holder__inner">
-                <table class="column-table left">
-                    <tr>
-                        <td>
-                            <app-slider mode="left-top" (change)="changedVolume($event, 'left-top')"></app-slider>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="pitch">
-                                <app-pitch mode="left"></app-pitch>
-                            </div>
-                            <div class="reverb">
-                                <app-slider mode="left-bottom"></app-slider>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <table class="column-table middle">
-                    <tr>
-                        <td class="slider-top">
-                            <app-slider mode="top"></app-slider>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="player__view">
-                                <div class="player__view__inner">
-                                    <div class="player__view__inner__holder">
-                                        <h1>{{title | uppercase}}</h1>
-                                    </div>
+<table class="interface">
+    <tr class="interface__head">
+        <td>Head</td>
+    </tr>
+    <tr class="interface__body">
+        <table class="diforb">
+            <tr>
+                <td class="sound left">
+                    <ul>
+                        <li class="category" *ngFor="let category of library" [ngClass]="{selected: selected.left == category.name}"
+                            (click)="selected.left = category.name">
+                            <span class="icon-play" *ngIf="isPlaying"></span>
+                            <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
+                            <h2>{{category.name | uppercase}}</h2>
+                        </li>
+                    </ul>
+                </td>
+                <td class="player">
+                    <div class="container">
+                        <div class="player">
+
+                            <div class="player__holder">
+                                <div class="player__holder__inner">
+                                    <table class="column-table left">
+                                        <tr>
+                                            <td>
+                                                <app-slider mode="left-top"
+                                                    (change)="changedVolume($event, 'left-top')"></app-slider>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="pitch">
+                                                    <app-pitch mode="left"></app-pitch>
+                                                </div>
+                                                <div class="reverb">
+                                                    <app-slider mode="left-bottom"></app-slider>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="column-table middle">
+                                        <tr>
+                                            <td class="slider-top">
+                                                <app-slider mode="top"></app-slider>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="player__view">
+                                                    <div class="player__view__inner">
+                                                        <div class="player__view__inner__holder">
+                                                            <h1 *ngIf="!isPlaying">{{title | uppercase}}</h1>
+                                                            <img *ngIf="isDownload" src="assets/img/gif/metaloader.gif"
+                                                                alt="progress-download">
+                                                            <canvas #canvas></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div>
+                                                    <div class="button button__play" (click)="onPlay()">
+                                                        <span [ngClass]="isPlaying ? 'icon-pause' : 'icon-play'"></span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="button button__download" (click)="onDownload()">Download
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="column-table right">
+                                        <tr>
+                                            <td>
+                                                <app-slider mode="right-top"
+                                                    (change)="changedVolume($event, 'right-top')">
+                                                </app-slider>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="pitch">
+                                                    <app-pitch mode="right"></app-pitch>
+                                                </div>
+                                                <div class="reverb">
+                                                    <app-slider mode="right-bottom"></app-slider>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
-                                <div class="button button__play" (click)="onPlay()">
-                                    <!-- {{isPlaying ? 'Stop' : 'Play'}} -->
-                                    <span [ngClass]="isPlaying ? 'icon-pause' : 'icon-play'"></span>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="button button__download">Download</div>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <table class="column-table right">
-                    <tr>
-                        <td>
-                            <app-slider mode="right-top" (change)="changedVolume($event, 'right-top')"></app-slider>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="pitch">
-                                <app-pitch mode="right"></app-pitch>
-                            </div>
-                            <div class="reverb">
-                                <app-slider mode="right-bottom"></app-slider>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="shadow"></div>
-</div>
+                        </div>
+                        <div class="shadow"></div>
+                    </div>
+                </td>
+                <td class="sound right">
+                    <ul>
+                        <li class="category" *ngFor="let category of library" [ngClass]="{selected: selected.right == category.name}"
+                            (click)="selected.right = category.name">
+                            <span class="icon-play" *ngIf="isPlaying"></span>
+                            <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
+                            <h2>{{category.name | uppercase}}</h2>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </tr>
+</table>

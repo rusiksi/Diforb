@@ -7,7 +7,7 @@ export class SoundAnalizer {
     Analyser: AnalyserNode;
     ScriptProcessor: ScriptProcessorNode;
 
-    private visualizers: any[];
+    private visualizers: Function[];
 
     constructor() {
 
@@ -32,6 +32,11 @@ export class SoundAnalizer {
 
     AddVisualizer = (visualizer) => {
         this.visualizers.push(visualizer);
+    }
+
+    UnSubscribe = (vizualizer) => {
+        let indexVizualizer = this.visualizers.indexOf(vizualizer);
+        if (indexVizualizer > -1) this.visualizers.splice(indexVizualizer, 1);
     }
 
 }

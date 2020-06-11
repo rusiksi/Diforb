@@ -70,16 +70,16 @@
 .interface-popup:before {
   content: "\e90b";
 }
-.interface-musical:before {
+.interface-music:before {
   content: "\e90c";
 }
 .interface-designed:before {
   content: "\e90d";
 }
-.interface-click-extra:before {
+.interface-extra:before {
   content: "\e90e";
 }
-.interface-click-main:before {
+.interface-main:before {
   content: "\e90f";
 }
 

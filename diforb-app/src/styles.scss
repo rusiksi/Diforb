@@ -10,6 +10,12 @@ html, body {
     font: 400 12px/1.4 'Play',  Arial,  Tahoma,  Verdana, sans-serif;
 }
 
+@media (min-width: $screen-md-min) {
+    html, body {
+        font: 400 1vh/1.4 'Play', Arial, Tahoma, Verdana, sans-serif;
+    }
+}
+
 *, :before, :after {
     box-sizing: border-box;
 }
@@ -18,4 +24,23 @@ a {
     outline: none;
 }
 
+ul {
+    list-style: none;
+    padding: 0
+}
 
+table {
+    border-collapse: collapse;
+}
+
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1rem;
+}
