@@ -5,17 +5,32 @@
     <tr class="interface__body">
         <table class="diforb">
             <tr>
-                <td class="sound left">
+                <td class="diforb__sound left">
                     <ul>
-                        <li class="category" *ngFor="let category of library" [ngClass]="{selected: selected.left == category.name}"
-                            (click)="selected.left = category.name">
-                            <span class="icon-play" *ngIf="isPlaying"></span>
+                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.left == i}"
+                            (click)="selected.left = i">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>
                         </li>
                     </ul>
+                    <div class="shadow-category" [ngClass]="'position__' + selected.left">
+                        <span class="icon-play" *ngIf="isPlaying"></span>
+                    </div>
+                    <ul class="dropdown">
+                        <li class="subcategory" *ngFor="let subcategory of library[selected.left].data; let show = false;">
+                            <div class="subcategory__title" (click)="show = !show">
+                                <span class="icon" [ngClass]="(title | lowercase) + '-' + (subcategory.name | lowercase)"></span>
+                                <span class="name">{{subcategory.name}}</span>
+                            </div>
+                            <ul class="subcategory__sound-list" *ngIf="subcategory.child == 'sound'" [class.show]="show">
+                                <li *ngFor="let sound of subcategory.data" (click)="setSound('left', [subcategory.name], sound.name)">
+                                    <span>{{sound.name}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </td>
-                <td class="player">
+                <td class="diforb__player">
                     <div class="container">
                         <div class="player">
 
@@ -98,15 +113,17 @@
                         <div class="shadow"></div>
                     </div>
                 </td>
-                <td class="sound right">
+                <td class="diforb__sound right">
                     <ul>
-                        <li class="category" *ngFor="let category of library" [ngClass]="{selected: selected.right == category.name}"
-                            (click)="selected.right = category.name">
-                            <span class="icon-play" *ngIf="isPlaying"></span>
+                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.right == i}"
+                            (click)="selected.right = i">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>
                         </li>
                     </ul>
+                    <div class="shadow-category" [ngClass]="'position__' + selected.right">
+                        <span class="icon-play" *ngIf="isPlaying"></span>
+                    </div>
                 </td>
             </tr>
         </table>

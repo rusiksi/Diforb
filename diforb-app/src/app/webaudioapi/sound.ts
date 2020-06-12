@@ -1,6 +1,7 @@
 import { WebApiBase } from './webapibase';
 import { BufferLoader } from './bufferLoader';
 import { convolverSoundsBasePath } from './const';
+import { SpinnerService } from '@app/services/spinner.services';
 
 export class Sound {
 
@@ -27,11 +28,15 @@ export class Sound {
     Volume = 0;
     CrossFadeValue = 1;
 
+    Spinner: SpinnerService;
+
     constructor(sideGainNode: GainNode, libGainNode?: GainNode) {
 
         this.GainNode = this.Context.createGain();
         this.SideGainNode = sideGainNode;
         this.GainNode.connect(this.SideGainNode);
+
+        this.Spinner = new SpinnerService();
     }
 
     Read = () => {
@@ -45,22 +50,17 @@ export class Sound {
             }
             return;
         }
+        this.Spinner.show();
         this.CurrenReadingSound = this.CurrenReadingSound == null ? 0 : this.CurrenReadingSound + 1;
 
         // var url = this.BaseFilePath + "/" + this.Files[this.CurrenReadingSound].id;
         var url = convolverSoundsBasePath + this.Files[this.CurrenReadingSound].id;
-        // var url = this.Files[this.CurrenReadingSound].id;
-
-        // var currentSoundInst = this;
 
         this.IsReading = true;
        
         this.BufferLoader.loadBuffer(url, (buffer) => {
-            // window.activeSpinnerSound();
             this.Files[this.CurrenReadingSound].buffer = buffer;
-            // window.activeDurationSound = function () {
-            //     return buffer["duration"];
-            // }
+            this.Spinner.hide();
             this.Read();
         });
     }

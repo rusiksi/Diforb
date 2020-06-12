@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterContentInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Inject, AfterContentInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Easing } from '@app/shared/utilites/easing';
 import { WebAudioApiService } from '@app/webaudioapi/webaudio.service';
@@ -7,6 +7,7 @@ import { Sound } from '@app/webaudioapi/sound';
 // import { AngularFireStorage } from '@angular/fire/storage';
 import { map } from 'rxjs/operators';
 import { LibrariesStorage, Library } from '@app/libraries/storage';
+import { Subscription } from 'rxjs';
 // declare const jQuery;
 
 @Component({
@@ -15,7 +16,7 @@ import { LibrariesStorage, Library } from '@app/libraries/storage';
 	styleUrls: ['./diforb.component.scss'],
 	providers: [WebAudioApiService]
 })
-export class DiforbComponent implements OnInit, AfterContentInit {
+export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 
 	@ViewChild('canvas', { static: true }) canvas: ElementRef;
 	
@@ -24,12 +25,17 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 	public isDownload = false;
 	public library: Library[];
 	public selected = {
-		left: 	<string> null,
-		right: 	<string> null
+		left: 	<number> null,
+		right: 	<number> null
+	}
+	public downloaded = {
+		left: false,
+		right: false
 	}
 
 	private soundLeft: Sound = null;
-	private soundRight: Sound = null;	
+	private soundRight: Sound = null;
+	private subscribed: Subscription[] = [];	
 
 	private canvasClientRect: ClientRect;
 
@@ -44,35 +50,14 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 		
 		this.setLibrary();
 		this.setIconsFont(doc);
-
-		// В самом начале
-		this.webAudioApiService.SetLibrary('[LIBRARY]: ' + this.title);
-		this.webAudioApiService.library.SoundAnalizer.AddVisualizer(this.drawAudioWave);
-		this.webAudioApiService.AddLeftSound('[Left Side]');
-		this.webAudioApiService.AddRightSound('[Right Side]');
-
-		// 1. устанавливаем Prefix. Why?
-		this.webAudioApiService.SetSoundNamePrefix('Test');
-
-		let libSideLeft = this.webAudioApiService.library.LeftSide,
-			libSideRight = this.webAudioApiService.library.RightSide;
-		
-
-		this.soundLeft = libSideLeft.Sounds['[Left Side]'],
-		this.soundRight = libSideRight.Sounds['[Right Side]'];
-
-		let baseSoundUrl = 'libraries/Cats-N-Dogs/';	
-		this.soundLeft.AddFiles("", [{ id: baseSoundUrl + 'Cats/Meow/CatsDogs_Cats_Meow_Meow_01.wav' }]);
-		this.soundLeft.Read();
-		this.soundLeft.SetVolume(0)
-		
-		this.soundRight.AddFiles("", [{ id: baseSoundUrl + 'Dogs/Big/CatsDogs_Dogs_Big_Big_01.wav' }]);
-		this.soundRight.Read();
-		this.soundRight.SetVolume(0);
-		
+		this.onWebAudioApi();
 	}
 
 	ngOnInit(): void {}
+
+	ngOnDestroy(): void {
+		this.subscribed.forEach(subFunc => subFunc && subFunc.unsubscribe());
+	}
 
 	ngAfterContentInit(): void {
 		this.canvasClientRect = this.canvas.nativeElement.getBoundingClientRect();
@@ -107,8 +92,9 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 		let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d'),
 			max = 51, k = this.canvasClientRect.width / max;
-		// clear the current state
+		
 		ctx.clearRect(0, 0, this.canvasClientRect.width, this.canvasClientRect.height);
+
 		for (let i = 0; i < max; i++) {
 			let z = Math.round(channelData.length / 68) * i,
 				x1 = i * k,
@@ -142,9 +128,8 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 				}
 			}
 
-			let y1 = 78 - Math.abs(y / 2);
-			// set the fill style Gradient
-			var gradient = ctx.createLinearGradient(0, 0, 0, y);
+			let y1 = 78 - Math.abs(y / 2),
+				gradient = ctx.createLinearGradient(0, 0, 0, y);
 
 			gradient.addColorStop(0, '#ccf5fb');
 			gradient.addColorStop(0.45, '#FFFFFF');
@@ -158,7 +143,6 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 	private clearAudioWave = (): void => {
 		let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d');
-		// clear the current state
 		ctx.clearRect(0, 0, this.canvasClientRect.width, this.canvasClientRect.height);
 	}
 
@@ -177,10 +161,52 @@ export class DiforbComponent implements OnInit, AfterContentInit {
 
 	private setLibrary(): void {
 		this.library = LibrariesStorage[this.title].data;
-		this.selected.left = this.library[0].name;
-		this.selected.right = this.library[0].name;
+		this.selected.left = this.selected.right = 0;
 
 		console.log('Library Array: ', this.library);
+	}
+
+	private onWebAudioApi = (): void => {
+		// В самом начале
+		this.webAudioApiService.SetLibrary('[LIBRARY]: ' + this.title);
+		this.webAudioApiService.library.SoundAnalizer.AddVisualizer(this.drawAudioWave);
+		this.webAudioApiService.AddLeftSound('[Left Side]');
+		this.webAudioApiService.AddRightSound('[Right Side]');
+
+		// 1. устанавливаем Prefix. Why?
+		this.webAudioApiService.SetSoundNamePrefix('Test');
+
+		let libSideLeft = this.webAudioApiService.library.LeftSide,
+			libSideRight = this.webAudioApiService.library.RightSide;
+
+
+		this.soundLeft = libSideLeft.Sounds['[Left Side]'],
+		this.soundRight = libSideRight.Sounds['[Right Side]'];
+
+		this.soundLeft.SetVolume(0);
+		this.soundRight.SetVolume(0);
+
+		this.subscribed.push(this.soundLeft.Spinner.loaderState.subscribe(event => this.downloaded.left = event.show));
+		this.subscribed.push(this.soundRight.Spinner.loaderState.subscribe(event => this.downloaded.right = event.show));
+	}
+
+	public setSound = (side: 'left' | 'right', subCategory: string[] ,sound: string): void => {
+		let nameCategory = this.library[this.selected[side]].name,
+			baseSoundUrl = 'libraries/' + this.title + '/', 
+			fullUrlSound = `${baseSoundUrl}${nameCategory}/${subCategory.join('/')}/${this.title}_${nameCategory}_${subCategory.join('_')}_${sound}.wav`;
+
+		console.log("[ Sound name: ] " + fullUrlSound);
+
+		if (side == 'left') {
+			
+			this.soundLeft.AddFiles("", [{ id: fullUrlSound }]);
+			this.soundLeft.Read();
+			
+		}
+		else if (side == 'right') {
+			this.soundRight.AddFiles("", [{ id: fullUrlSound }]);
+			this.soundRight.Read();
+		}
 	}
 
 }
