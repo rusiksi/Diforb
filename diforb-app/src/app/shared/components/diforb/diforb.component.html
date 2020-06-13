@@ -8,16 +8,18 @@
                 <td class="diforb__sound left">
                     <ul>
                         <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.left == i}"
-                            (click)="selected.left = i">
+                            (click)="selectCategory('left', i)">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>
                         </li>
                     </ul>
-                    <div class="shadow-category" [ngClass]="'position__' + selected.left">
+                    <div class="shadow-category" [ngClass]="'position__' + memory.index">
                         <span class="icon-play" *ngIf="isPlaying"></span>
                     </div>
                     <ul class="dropdown">
-                        <li class="subcategory" *ngFor="let subcategory of library[selected.left].data; let show = false;">
+                        <li class="subcategory"
+                            *ngFor="let subcategory of library[selected.left].data; let subInx = index; let isLast = last; let show = false;" 
+                            appAnimateInit [appAnimateDelay]="subInx" [appAnimateDestroy]="destroyed" (appAnimateCallBack)="isLast && afterDestroyed()">
                             <div class="subcategory__title" (click)="show = !show">
                                 <span class="icon" [ngClass]="(title | lowercase) + '-' + (subcategory.name | lowercase)"></span>
                                 <span class="name">{{subcategory.name}}</span>

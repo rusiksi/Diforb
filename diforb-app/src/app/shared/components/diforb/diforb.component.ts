@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, AfterContentInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Inject, AfterContentInit, ViewChild, ElementRef, OnDestroy, AfterContentChecked, OnChanges, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Easing } from '@app/shared/utilites/easing';
 import { WebAudioApiService } from '@app/webaudioapi/webaudio.service';
@@ -8,6 +8,7 @@ import { Sound } from '@app/webaudioapi/sound';
 import { map } from 'rxjs/operators';
 import { LibrariesStorage, Library } from '@app/libraries/storage';
 import { Subscription } from 'rxjs';
+import { gsap, TweenMax } from 'gsap';
 // declare const jQuery;
 
 @Component({
@@ -16,7 +17,7 @@ import { Subscription } from 'rxjs';
 	styleUrls: ['./diforb.component.scss'],
 	providers: [WebAudioApiService]
 })
-export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
+export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 
 	@ViewChild('canvas', { static: true }) canvas: ElementRef;
 	
@@ -32,24 +33,29 @@ export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 		left: false,
 		right: false
 	}
+	public destroyed = false;
 
 	private soundLeft: Sound = null;
 	private soundRight: Sound = null;
 	private subscribed: Subscription[] = [];	
-
 	private canvasClientRect: ClientRect;
+	private doc: Document;
+
+	private memory: { side: string, index: number } = {side: null, index: 0};
+	
 
 	constructor(
 		// firestore: AngularFirestore,
 		// storage: AngularFireStorage,
+		private elementRef: ElementRef,
 		private webAudioApiService: WebAudioApiService,
 		@Inject(DOCUMENT) doc: Document
 	) {
 		
 		console.log('[Diforb component constructor]:');
-		
+		this.doc = doc;
 		this.setLibrary();
-		this.setIconsFont(doc);
+		this.setIconsFont();
 		this.onWebAudioApi();
 	}
 
@@ -59,8 +65,26 @@ export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 		this.subscribed.forEach(subFunc => subFunc && subFunc.unsubscribe());
 	}
 
+	ngOnChanges(changed): void {
+		console.log('Changed', changed);
+	}
+
 	ngAfterContentInit(): void {
 		this.canvasClientRect = this.canvas.nativeElement.getBoundingClientRect();
+		console.log('After Content Init');
+	}
+
+	ngAfterContentChecked(): void {
+		
+	}
+
+	ngAfterViewInit(): void {
+		console.log('ng After View Init');
+	}
+
+	ngAfterViewChecked(): void {
+
+		// console.log('ng After View Checked');
 	}
 
 	public onPlay = (): void => {
@@ -146,8 +170,8 @@ export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 		ctx.clearRect(0, 0, this.canvasClientRect.width, this.canvasClientRect.height);
 	}
 
-	private setIconsFont(doc: Document): void {
-		let link = doc.createElement('link'),
+	private setIconsFont(): void {
+		let link = this.doc.createElement('link'),
 			css = {
 				href: 'assets/libs/css/icons/'+ this.title +'/style.css',
 				type: 'text/css',
@@ -156,7 +180,7 @@ export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 
 		for (let key in css) link.setAttribute(key, css[key]);
 
-		doc.head.appendChild(link);
+		this.doc.head.appendChild(link);
 	}
 
 	private setLibrary(): void {
@@ -207,6 +231,19 @@ export class DiforbComponent implements OnInit, OnDestroy, AfterContentInit {
 			this.soundRight.AddFiles("", [{ id: fullUrlSound }]);
 			this.soundRight.Read();
 		}
+	}
+
+	public selectCategory = (side: 'left' | 'right', index: number): void => {
+		this.destroyed = true;
+		this.memory = {
+			side: side, index: index
+		}
+	}
+
+	public afterDestroyed = (): void => {
+		console.log('After Destroyed');
+		this.destroyed = false;
+		this.selected[this.memory.side] = this.memory.index;
 	}
 
 }

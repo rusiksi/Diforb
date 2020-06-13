@@ -12,7 +12,7 @@ $url-pattern: '../../../../assets/img/png/player_pattern.png';
 $url-shadow: '../../../../assets/img/png/circle-shadow.png';
 
 $size-head: 6vh;
-$size-sound: 8vh;
+$size-sound: 10vh;
 
 $color-white: white;
 $color-icon: rgba(255, 255, 255, 0.8);
@@ -27,6 +27,9 @@ $background-container-player: linear-gradient(to bottom, rgba(0, 0, 0, .4) 0%, r
 $box-shadow-category: 0 -1px rgba(0, 0, 0, .1) inset, 0 1px rgba(255, 255, 255, .2);
 
 $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
+
+$padding-dropdown-top: 1vw;
+$padding-dropdown: 2vw;
 
 :host {
     display: table;
@@ -59,7 +62,7 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
 
                 .category {
                     position: relative;
-                    width: $size-sound; height: $size-sound;
+                    width: 100%; height: $size-sound;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -75,7 +78,7 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
                     // }
 
                     .icon {
-                        font-size: 4rem;
+                        font-size: 6rem;
                     }
 
                     .icon-play {
@@ -120,22 +123,22 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
                 &.left {
 
                     .dropdown {
-                        padding-left: 15%;
+                        padding-left: $padding-dropdown;
                         text-align: left;
 
                         .subcategory {
 
                             &__sound-list {
-                                padding-left: 15%;
+                                padding-left: 3rem;
 
                                 li {
 
                                     &:before {
-                                        margin-left: -9%;
+                                        margin-left: -1.5rem;
                                     }
 
                                     &:after {
-                                        margin-left: -5%;
+                                        // margin-left: -5%;
                                         transform: rotate(90deg);
                                     }
 
@@ -154,13 +157,13 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
                 &.right {
 
                     .dropdown {
-                        padding-right: 15%;
+                        padding-right: $padding-dropdown;
                         text-align: right;
 
                         .subcategory {
 
                             &__sound-list {
-                                padding-right: 15%;
+                                padding-right: 3rem;
 
                                 li {
 
@@ -180,9 +183,9 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
                     top: 0; left: $size-sound;
                     width: 2.5 * $size-sound;
                     max-height: 100%;
-                    overflow-y: auto; 
-
-                   
+                    padding-top: $padding-dropdown-top;
+                    overflow-y: auto;
+                    overflow-x: hidden; 
 
                     .subcategory {
 
@@ -207,7 +210,7 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
 
                             &.show {
                                 height: auto;
-                                font-size: inherit;
+                                font-size: 2rem;
                             }
 
                             li {
@@ -397,8 +400,6 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
                     position: absolute;
                     left: 50%;
                     top: 50%;
-                    // margin-top: 2px;
-                    // margin-left: 2px;
                     transform: translate(-50%, -50%);
                     color: $btn-color;
                     font-size: 3vh;
@@ -439,15 +440,12 @@ $transition-category-sound: top cubic-bezier(0.68, -0.55, 0.265, 1.55) .2s;
         z-index: 0;
         position: absolute;
         left: 50%; top: 50%;
-        
-        width: $min-size;
-        height: $min-size / 2;
-        background: url($url-shadow) no-repeat;
+        width: $min-size; height: $min-size / 2;
         transform: translate(-33%, 7%);
+        @include backgroundOptional(url($url-shadow), cover);
 
         @media (min-width: $screen-md-min) {
-            width: $size;
-            height: $size / 2;
+            width: $size; height: $size / 2;
         }
     }
 }

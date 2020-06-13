@@ -355,24 +355,109 @@ export const LibrariesStorage = {
                 name: 'Main',
                 type: LibraryType.Category,
                 child: LibraryType.SubCategory,
-                data: []
+                data: [
+                    {
+                        name: 'Glass',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    },
+                    {
+                        name: 'Metal',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    },
+                    {
+                        name: 'Percussion',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    },
+                    {
+                        name: 'Plastic',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    },
+                    {
+                        name: 'Wood',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    }
+                ]
             },
             {
                 name: 'Music',
                 type: LibraryType.Category,
                 child: LibraryType.SubCategory,
-                data: []
+                data: [
+                    {
+                        name: 'Negative',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    },
+                    {
+                        name: 'Positive',
+                        type: LibraryType.SubCategory,
+                        child: LibraryType.Sound,
+                        data: []
+                    }
+                ]
             },
             {
                 name: 'PopUp',
                 type: LibraryType.Category,
-                child: LibraryType.SubCategory,
-                data: []
+                child: LibraryType.Sound,
+                data: [
+                    {
+                        name: 'Main_Cartoon',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Magical',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Metal',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Musical',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Paper',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Scary',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Sci-fi',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Stone',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Water',
+                        type: LibraryType.Sound
+                    },
+                    {
+                        name: 'Main_Wood',
+                        type: LibraryType.Sound
+                    }
+                ]
             },
             {
                 name: 'Swish',
                 type: LibraryType.Category,
-                child: LibraryType.SubCategory,
+                child: LibraryType.Sound,
                 data: []
             }
         ]
