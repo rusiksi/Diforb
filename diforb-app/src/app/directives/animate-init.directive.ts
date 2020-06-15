@@ -8,19 +8,22 @@ export class AnimateInitDirective implements OnInit, OnDestroy, OnChanges {
 
 	@Input('appAnimateDelay') delay: number = 0;
 	@Input('appAnimateDestroy') isDestroy: boolean = false;
+	@Input('appAnimateSide') side: 'left' | 'right';
 
 	@Output('appAnimateCallBack') destroyed: EventEmitter<null> = new EventEmitter();
 
-	private gsapAnimation = gsap.timeline();
+	private gsapAnimation = gsap.timeline({ autoRemoveChildren: true});
 	private duration = 0.3;
+	private xCoordinate: number;
 
-	constructor(private elementRef: ElementRef) { }
+	constructor(private elementRef: ElementRef) {}
 
 	ngOnInit(): void {
 		console.log('appAnimateInit ON INIT');
+		this.xCoordinate = (this.side == 'left') ? -1 * 100 : 100;
 		this.gsapAnimation.from(this.elementRef.nativeElement, {
 			opacity: 0,
-			x: -100,
+			x: this.xCoordinate,
 			duration: this.duration,
 			delay: this.delay * 0.1
 		})
@@ -33,7 +36,7 @@ export class AnimateInitDirective implements OnInit, OnDestroy, OnChanges {
 				x: 0
 			}, {
 				opacity: 0,
-				x: -100,
+				x: this.xCoordinate,
 				duration: this.duration,
 				delay: this.delay * 0.1
 			}).then(() => this.destroyed.emit());

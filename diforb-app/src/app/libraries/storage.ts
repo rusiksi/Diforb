@@ -4,6 +4,13 @@ export enum LibraryType {
     Sound = 'sound'
 }
 
+export interface Library {
+    name: string,
+    type: LibraryType,
+    child: LibraryType,
+    data: any[]
+}
+
 export const LibrariesStorage = {
     "Birds": {},
 
@@ -329,25 +336,169 @@ export const LibrariesStorage = {
                         name: 'Digital',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Digital_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Sci_Fi_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Sci_Fi_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Sci_Fi_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: '8-Bit_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: '8-Bit_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: '8-Bit_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Blip_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Blip_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Blip_03',
+                                type: LibraryType.Sound
+                            },
+                        ]
                     },
                     {
                         name: 'Other',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Organic_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Organic_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Organic_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Water_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Water_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Water_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Paper',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Stone',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     },
                     {
                         name: 'Snow',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Snow_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Snow_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Snow_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Snow_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Snow_05',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     },
                     {
                         name: 'Voice',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Voice_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_06',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_07',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Voice_08',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     }
                 ]
             },
@@ -360,31 +511,224 @@ export const LibrariesStorage = {
                         name: 'Glass',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Glass_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Glass_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Glass_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Glass_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Glass_05',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     },
                     {
                         name: 'Metal',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Small_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_04',
+                                type: LibraryType.Sound
+                            },
+                        ]
                     },
                     {
                         name: 'Percussion',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Percussion_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Percussion_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Percussion_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Percussion_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Percussion_05',
+                                type: LibraryType.Sound
+                            },
+                        ]
                     },
                     {
                         name: 'Plastic',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Big_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Big_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_06',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Medium_07',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Small_05',
+                                type: LibraryType.Sound
+                            },
+                        ]
                     },
                     {
                         name: 'Wood',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                             {
+                                name: 'Wood_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_06',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Wood_07',
+                                type: LibraryType.Sound
+                            },
+                        ]
                     }
                 ]
             },
@@ -397,13 +741,135 @@ export const LibrariesStorage = {
                         name: 'Negative',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Digital_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_05',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     },
                     {
                         name: 'Positive',
                         type: LibraryType.SubCategory,
                         child: LibraryType.Sound,
-                        data: []
+                        data: [
+                            {
+                                name: 'Digital_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_06',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_07',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_08',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_09',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Digital_10',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_01',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_02',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_03',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_04',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_05',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_06',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_07',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_08',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_09',
+                                type: LibraryType.Sound
+                            },
+                            {
+                                name: 'Natural_10',
+                                type: LibraryType.Sound
+                            }
+                        ]
                     }
                 ]
             },
@@ -413,44 +879,54 @@ export const LibrariesStorage = {
                 child: LibraryType.Sound,
                 data: [
                     {
-                        name: 'Main_Cartoon',
-                        type: LibraryType.Sound
+                        name: 'Cartoon',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Magical',
-                        type: LibraryType.Sound
+                        name: 'Magical',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Metal',
-                        type: LibraryType.Sound
+                        name: 'Metal',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Musical',
-                        type: LibraryType.Sound
+                        name: 'Musical',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Paper',
-                        type: LibraryType.Sound
+                        name: 'Paper',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Scary',
-                        type: LibraryType.Sound
+                        name: 'Scary',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Sci-fi',
-                        type: LibraryType.Sound
+                        name: 'Sci-fi',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Stone',
-                        type: LibraryType.Sound
+                        name: 'Stone',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Water',
-                        type: LibraryType.Sound
+                        name: 'Water',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     },
                     {
-                        name: 'Main_Wood',
-                        type: LibraryType.Sound
+                        name: 'Wood',
+                        type: LibraryType.Sound,
+                        parent: 'PopUp'
                     }
                 ]
             },
@@ -458,7 +934,33 @@ export const LibrariesStorage = {
                 name: 'Swish',
                 type: LibraryType.Category,
                 child: LibraryType.Sound,
-                data: []
+                data: [
+                    {
+                        name: 'Swish_01',
+                        type: LibraryType.Sound,
+                        parent: 'Swish'
+                    },
+                    {
+                        name: 'Swish_02',
+                        type: LibraryType.Sound,
+                        parent: 'Swish'
+                    },
+                    {
+                        name: 'Swish_03',
+                        type: LibraryType.Sound,
+                        parent: 'Swish'
+                    },
+                    {
+                        name: 'Swish_04',
+                        type: LibraryType.Sound,
+                        parent: 'Swish'
+                    },
+                    {
+                        name: 'Swish_05',
+                        type: LibraryType.Sound,
+                        parent: 'Swish'
+                    }
+                ]
             }
         ]
     },
@@ -472,12 +974,7 @@ export const LibrariesStorage = {
     "Zoo": []
 }
 
-export interface Library {
-    name: string, 
-    type: LibraryType,
-    child: LibraryType, 
-    data: any[]
-}
+
 
 
 

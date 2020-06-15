@@ -41,7 +41,11 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	private canvasClientRect: ClientRect;
 	private doc: Document;
 
-	private memory: { side: string, index: number } = {side: null, index: 0};
+	private memory: Memory = {
+		side: null, 
+		index: { left: 0, right: 0 },
+		destroyed: { left: false, right: false }
+	};
 	
 
 	constructor(
@@ -96,6 +100,8 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 		if (!this.isPlaying) {
 			this.webAudioApiService.library.SoundAnalizer.UnSubscribe(this.drawAudioWave);
 			this.clearAudioWave();
+		} else {
+			this.webAudioApiService.library.SoundAnalizer.AddVisualizer(this.drawAudioWave);
 		}
 	}
 
@@ -193,7 +199,7 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	private onWebAudioApi = (): void => {
 		// В самом начале
 		this.webAudioApiService.SetLibrary('[LIBRARY]: ' + this.title);
-		this.webAudioApiService.library.SoundAnalizer.AddVisualizer(this.drawAudioWave);
+		
 		this.webAudioApiService.AddLeftSound('[Left Side]');
 		this.webAudioApiService.AddRightSound('[Right Side]');
 
@@ -217,12 +223,11 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	public setSound = (side: 'left' | 'right', subCategory: string[] ,sound: string): void => {
 		let nameCategory = this.library[this.selected[side]].name,
 			baseSoundUrl = 'libraries/' + this.title + '/', 
-			fullUrlSound = `${baseSoundUrl}${nameCategory}/${subCategory.join('/')}/${this.title}_${nameCategory}_${subCategory.join('_')}_${sound}.wav`;
+			fullUrlSound = `${baseSoundUrl}${nameCategory}/${subCategory.join('/')}/${sound}.wav`;
 
 		console.log("[ Sound name: ] " + fullUrlSound);
 
 		if (side == 'left') {
-			
 			this.soundLeft.AddFiles("", [{ id: fullUrlSound }]);
 			this.soundLeft.Read();
 			
@@ -234,18 +239,22 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	}
 
 	public selectCategory = (side: 'left' | 'right', index: number): void => {
-		this.destroyed = true;
-		this.memory = {
-			side: side, index: index
-		}
+		this.memory.destroyed[side] = true;
+		this.memory.side = side;
+		this.memory.index[side] = index;
 	}
 
 	public afterDestroyed = (): void => {
 		console.log('After Destroyed');
-		this.destroyed = false;
-		this.selected[this.memory.side] = this.memory.index;
+		this.memory.destroyed[this.memory.side] = false;
+		this.selected[this.memory.side] = this.memory.index[this.memory.side];
 	}
+}
 
+interface Memory {
+	side: string,
+	index: { left: number, right: number },
+	destroyed: { left: boolean, right: boolean } 
 }
 
 

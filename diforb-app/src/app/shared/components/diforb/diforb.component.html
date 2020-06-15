@@ -13,16 +13,20 @@
                             <h2>{{category.name | uppercase}}</h2>
                         </li>
                     </ul>
-                    <div class="shadow-category" [ngClass]="'position__' + memory.index">
+                    <div class="shadow-category" [ngClass]="'position__' + memory.index.left">
                         <span class="icon-play" *ngIf="isPlaying"></span>
                     </div>
                     <ul class="dropdown">
                         <li class="subcategory"
-                            *ngFor="let subcategory of library[selected.left].data; let subInx = index; let isLast = last; let show = false;" 
-                            appAnimateInit [appAnimateDelay]="subInx" [appAnimateDestroy]="destroyed" (appAnimateCallBack)="isLast && afterDestroyed()">
-                            <div class="subcategory__title" (click)="show = !show">
-                                <span class="icon" [ngClass]="(title | lowercase) + '-' + (subcategory.name | lowercase)"></span>
+                            *ngFor="let subcategory of library[selected.left].data; let subInx = index; let isLast = last; let show = false;"
+                            appAnimateInit [appAnimateDelay]="subInx" [appAnimateDestroy]="memory.destroyed.left" appAnimateSide="left"
+                            (appAnimateCallBack)="isLast && afterDestroyed()">
+                            <div class="subcategory__title" (click)="(subcategory.type == 'subcategory') ? show = !show : setSound('left', [], subcategory.name)">
+                                <span class="arrow left"></span>
+                                <span class="icon" *ngIf="subcategory.type == 'subcategory'" [ngClass]="(title | lowercase) + '-' + (subcategory.name | lowercase)"></span>
+                                <span class="icon" *ngIf="subcategory.type == 'sound'" [ngClass]="(title | lowercase) + '-' + (subcategory.parent | lowercase)"></span>
                                 <span class="name">{{subcategory.name}}</span>
+                                
                             </div>
                             <ul class="subcategory__sound-list" *ngIf="subcategory.child == 'sound'" [class.show]="show">
                                 <li *ngFor="let sound of subcategory.data" (click)="setSound('left', [subcategory.name], sound.name)">
@@ -118,14 +122,33 @@
                 <td class="diforb__sound right">
                     <ul>
                         <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.right == i}"
-                            (click)="selected.right = i">
+                            (click)="selectCategory('right', i)">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>
                         </li>
                     </ul>
-                    <div class="shadow-category" [ngClass]="'position__' + selected.right">
+                    <div class="shadow-category" [ngClass]="'position__' + memory.index.right">
                         <span class="icon-play" *ngIf="isPlaying"></span>
                     </div>
+                    <ul class="dropdown">
+                        <li class="subcategory"
+                            *ngFor="let subcategory of library[selected.right].data; let subInx = index; let isLast = last; let show = false;"
+                            appAnimateInit [appAnimateDelay]="subInx" [appAnimateDestroy]="memory.destroyed.right" appAnimateSide="right"
+                            (appAnimateCallBack)="isLast && afterDestroyed()">
+                            <div class="subcategory__title" (click)="(subcategory.type == 'subcategory') ? show = !show : setSound('right', [], subcategory.name)"> 
+                                <span class="name">{{subcategory.name}}</span>
+                                <span class="icon" *ngIf="subcategory.type == 'subcategory'"
+                                    [ngClass]="(title | lowercase) + '-' + (subcategory.name | lowercase)"></span>
+                                <span class="icon" *ngIf="subcategory.type == 'sound'"
+                                    [ngClass]="(title | lowercase) + '-' + (subcategory.parent | lowercase)"></span>
+                            </div>
+                            <ul class="subcategory__sound-list" *ngIf="subcategory.child == 'sound'" [class.show]="show">
+                                <li *ngFor="let sound of subcategory.data" (click)="setSound('right', [subcategory.name], sound.name)">
+                                    <span>{{sound.name}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         </table>

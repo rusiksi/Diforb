@@ -69,13 +69,9 @@ $padding-dropdown: 2vw;
                     background: $background-category;
                     box-shadow: $box-shadow-category;
                     
-                    // &.selected {
-                    //     background: $background-category-selected;
-
-                    //     .icon-play {
-                    //         visibility: visible
-                    //     }
-                    // }
+                    &.selected {
+                        color: $color-icon-active
+                    }
 
                     .icon {
                         font-size: 6rem;
@@ -123,6 +119,7 @@ $padding-dropdown: 2vw;
                 &.left {
 
                     .dropdown {
+                        left: $size-sound;
                         padding-left: $padding-dropdown;
                         text-align: left;
 
@@ -133,21 +130,21 @@ $padding-dropdown: 2vw;
 
                                 li {
 
-                                    &:before {
-                                        margin-left: -1.5rem;
-                                    }
+                                    // &:before {
+                                    //     margin-left: -1.5rem;
+                                    // }
 
-                                    &:after {
-                                        // margin-left: -5%;
-                                        transform: rotate(90deg);
-                                    }
+                                    // &:after {
+                                    //     // margin-left: -5%;
+                                    //     transform: rotate(90deg);
+                                    // }
 
-                                    &:last-child {
+                                    // &:last-child {
 
-                                        &:before {
-                                            height: 50%;
-                                        }
-                                    }
+                                    //     &:before {
+                                    //         height: 50%;
+                                    //     }
+                                    // }
                                 }
                             }
                         }
@@ -157,6 +154,7 @@ $padding-dropdown: 2vw;
                 &.right {
 
                     .dropdown {
+                        right: $size-sound;
                         padding-right: $padding-dropdown;
                         text-align: right;
 
@@ -167,11 +165,11 @@ $padding-dropdown: 2vw;
 
                                 li {
 
-                                    &:before {
-                                        margin-left: -9%;
-                                    }
+                                    // &:before {
+                                    //     margin-left: -9%;
+                                    // }
 
-                                    &:after {}
+                                    // &:after {}
                                 }
                             }
                         }
@@ -180,7 +178,7 @@ $padding-dropdown: 2vw;
 
                 .dropdown {
                     position: absolute;
-                    top: 0; left: $size-sound;
+                    top: 0; 
                     width: 2.5 * $size-sound;
                     max-height: 100%;
                     padding-top: $padding-dropdown-top;
@@ -214,17 +212,17 @@ $padding-dropdown: 2vw;
                             }
 
                             li {
-                                position: relative;
+                                // position: relative;
 
-                                &:after,
-                                &:before {
-                                    position: absolute;
-                                    left: 0; top: 0;
-                                    display: table;
-                                    height: 100%;
-                                    border-left: 1px dotted $color-border-dotted;
-                                    content: "";
-                                }
+                                // &:after,
+                                // &:before {
+                                //     position: absolute;
+                                //     left: 0; top: 0;
+                                //     display: table;
+                                //     height: 100%;
+                                //     border-left: 1px dotted $color-border-dotted;
+                                //     content: "";
+                                // }
                             }
                         }
                     }
