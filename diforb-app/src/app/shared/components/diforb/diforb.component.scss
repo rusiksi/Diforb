@@ -44,6 +44,12 @@ $padding-dropdown: 2vw;
 
     &__head {
         height: $size-head;
+
+        &__wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 5rem;
+        }
     }
 
     &__body {
@@ -320,15 +326,29 @@ $padding-dropdown: 2vw;
 
                 td {
                     vertical-align:  top;
+
+                    &.top {}
+
+                    &.bottom {
+                        padding-top: 35%;;
+                    }
                 }
             }
 
             &.left {
                 text-align: left;
+
+                .reverb {
+                    left: 50%;
+                }
             }
 
             &.right {
                 text-align: right;
+
+                .reverb {
+                    left: 0%;
+                }
             }
         }
 
@@ -375,6 +395,11 @@ $padding-dropdown: 2vw;
 
         .pitch {
             height: 30%;
+        }
+
+        .reverb {
+            position: relative;
+            padding-bottom: 20%;
         }
 
         .button {

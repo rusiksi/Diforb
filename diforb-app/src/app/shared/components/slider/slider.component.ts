@@ -17,7 +17,7 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	// @ViewChild('clipPath', { static: true }) clipPath: ElementRef;
 
 	public isGrab = false;
-	
+	public reverb: SlideReverb;
 
 	private volume = 0;
 	private min = 0;
@@ -45,7 +45,32 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	constructor(private elem: ElementRef) { }
 
 	ngOnInit(): void {
-		
+		if (this.mode == 'left-bottom' || this.mode == 'right-bottom') {
+			this.reverb = {
+				left: [
+					{
+						x: 40, y: 5, selected: false, title: 'room'
+					},
+					{
+						x: 60, y: 25, selected: false, title: 'hall'
+					},
+					{
+						x: 80, y: 45, selected: false, title: 'stadium'
+					}
+				],
+				right: [
+					{
+						x: 40, y: 5, selected: false, title: 'room'
+					},
+					{
+						x: 60, y: 25, selected: false, title: 'hall'
+					},
+					{
+						x: 80, y: 45, selected: false, title: 'stadium'
+					}
+				]
+			};
+		}
 	}
 
 	ngAfterContentInit(): void {
@@ -128,6 +153,11 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 			this.changedVolume.emit(this.volume);
 		}
 	}
+
+	onClickReverb = (side: 'left' | 'right', index: number): void => {
+		this.reverb[side].forEach(v => v.selected = false);
+		this.reverb[side][index].selected = !this.reverb[side][index].selected;
+	}
 }
 
 type ModeSlider = 'top' | 'left-top' | 'right-top' | 'left-bottom' | 'right-bottom';
@@ -135,6 +165,11 @@ type ModeSlider = 'top' | 'left-top' | 'right-top' | 'left-bottom' | 'right-bott
 interface SlideRanger {
 	handle: Element,
 	value: number
+}
+
+interface SlideReverb {
+	left: 	{ x: number, y: number, selected: boolean, title: string }[],
+	right: 	{ x: number, y: number, selected: boolean, title: string }[]
 }
 
 

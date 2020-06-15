@@ -8,10 +8,20 @@
         position: relative;
         z-index: 1;
 
-        .handler {
+        .volume-handler {
             cursor: pointer;
             position: relative;
             z-index: 2;
+        }
+
+        .reverb-button {
+
+            &:hover {
+
+                text {
+                    fill: #4AB873;
+                }
+            }
         }
     }
 
@@ -32,5 +42,9 @@
     .top {
         width: 130%;
         margin: 0 -15%;
+    }
+
+    .left-bottom, .right-bottom {
+        width: 95%;
     }
 }

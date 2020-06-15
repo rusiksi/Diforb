@@ -1,6 +1,15 @@
 <table class="interface">
     <tr class="interface__head">
-        <td>Head</td>
+        <td>
+            <div class="interface__head__wrapper">
+                <div class="left">
+                    <app-mute></app-mute>
+                </div>
+                <div class="right">
+                    <app-mute></app-mute>
+                </div>
+            </div>
+        </td>
     </tr>
     <tr class="interface__body">
         <table class="diforb">
@@ -44,13 +53,13 @@
                                 <div class="player__holder__inner">
                                     <table class="column-table left">
                                         <tr>
-                                            <td>
+                                            <td class="top">
                                                 <app-slider mode="left-top"
                                                     (change)="changedVolume($event, 'left-top')"></app-slider>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td class="bottom">
                                                 <div class="pitch">
                                                     <app-pitch mode="left"></app-pitch>
                                                 </div>
@@ -96,14 +105,14 @@
                                     </table>
                                     <table class="column-table right">
                                         <tr>
-                                            <td>
+                                            <td class="top">
                                                 <app-slider mode="right-top"
                                                     (change)="changedVolume($event, 'right-top')">
                                                 </app-slider>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td class="bottom">
                                                 <div class="pitch">
                                                     <app-pitch mode="right"></app-pitch>
                                                 </div>

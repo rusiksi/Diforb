@@ -12,6 +12,8 @@ import { DiforbComponent } from './shared/components/diforb/diforb.component';
 import { SharedModule } from './shared/shared.module';
 import { SliderComponent } from './shared/components/slider/slider.component';
 import { PitchComponent } from './shared/components/pitch/pitch.component';
+import { MuteComponent } from './shared/components/mute/mute.component';
+
 import { AnimateInitDirective } from './directives/animate-init.directive';
 
 // import { WebAudioApiService } from './webaudioapi/webaudio.service';
@@ -22,7 +24,8 @@ import { AnimateInitDirective } from './directives/animate-init.directive';
 		DiforbComponent,
 		SliderComponent,
 		PitchComponent,
-		AnimateInitDirective
+		AnimateInitDirective,
+		MuteComponent
 	],
 	imports: [
 		BrowserModule,
