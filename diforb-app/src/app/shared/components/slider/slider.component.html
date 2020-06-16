@@ -534,7 +534,7 @@
 						S11.004,6.346,11.003,8.002z" />
 	
 			</g>
-			<g class="reverb-active" [style.opacity]="btn.selected?1:0">
+			<g class="reverb-active" [attr.opacity]="btn.selected?1:0">
 				<path fill="#4AB873" d="M7.995,2c2.375,0,4.626,1.421,5.57,3.761c1.241,3.071-0.243,6.565-3.314,7.804
 							C9.516,13.859,8.757,14,8.011,14c-2.375,0-4.625-1.42-5.569-3.758C1.201,7.17,2.685,3.675,5.756,2.437C6.49,2.14,7.249,2,7.995,2
 							 M7.995,0C6.97,0,5.965,0.196,5.009,0.581C3.027,1.38,1.476,2.903,0.641,4.87c-0.834,1.966-0.854,4.14-0.053,6.12
@@ -609,7 +609,7 @@
 
 <svg *ngIf="mode == 'right-bottom'" class="right-bottom" x="0px" y="0px" width="200px" height="100px" viewBox="0 0 200 100"
 	enable-background="new 0 0 200 100" xml:space="preserve">
-	<g class="reverb-range">
+	<g class="reverb-range" transform="translate(100,0)">
 		<filter id="REVERB_RIGHT_f2" y="0" x="0">
 			<feGaussianBlur in="SourceGraphic" stdDeviation="1"></feGaussianBlur>
 		</filter>
@@ -680,7 +680,7 @@
 			l-1.144,1.263l2.108,1.909l1.144-1.264c0.392-0.433,0.624-0.778,0.696-1.037S97.114,45.906,96.901,45.713z" />
 		</g>
 	</g>
-	<g class="reverb-grad" transform="translate(-8,-2)">
+	<g class="reverb-grad" transform="translate(92,-2)">
 		<g transform="translate(-1,-1)">
 			<defs>
 				<filter id="f1" x="0" y="0">
@@ -720,7 +720,7 @@
 	</g>
 
 	<g class="reverb-buttons" *ngFor="let btn of reverb.right; let i = index;">
-		<g class="reverb-button" [attr.transform]=" 'translate('+btn.x+', '+btn.y+')' " (click)="onClickReverb('left', i)">
+		<g class="reverb-button" [attr.transform]=" 'translate('+btn.x+', '+btn.y+')' " (click)="onClickReverb('right', i)">
 			<g class="reverb-passive">
 				<linearGradient [attr.id]=" 'SLIDER_REVERB_PASSIVE_'+i " gradientUnits="userSpaceOnUse" x1="8.0339" y1="-19.9636"
 					x2="-1.2649" y2="-3.8576" gradientTransform="matrix(1 0 0 -1 8.5 3.1812)">
@@ -793,9 +793,39 @@
 										c-1.658,0-3.001-1.342-3-3c0-1.656,1.343-2.999,3-2.999C9.661,5.001,11.004,6.346,11.003,8.002z" />
 			</g>
 			<g class="reverb-title">
-				<text x="35" y="10" fill="#838688" font-size="1.5em" text-rendering="optimizeLegibility" font-variant="small-caps"
-					letter-spacing=".1em">{{btn.title}}</text>
+				<text x="-20" y="10" fill="#838688" font-size="1.5em" text-rendering="optimizeLegibility" font-variant="small-caps"
+					letter-spacing=".1em" text-anchor="end">{{btn.title}}</text>
 			</g>
 		</g>
+	</g>
+
+	<g class="reverb-handler" transform="translate(180,0)">
+		<linearGradient id="REVERB_LEFT_HANDLER_1" gradientUnits="userSpaceOnUse" x1="3.5317" y1="3.4653" x2="26.5141"
+			y2="26.4477">
+			<stop offset="0.0142" style="stop-color:#5A5A5A;stop-opacity:0.4" />
+			<stop offset="0.8328" style="stop-color:#5A5A5A;stop-opacity:0" />
+		</linearGradient>
+		<path fill="url(#REVERB_LEFT_HANDLER)" d="M28.444,23.575c0.949-2.236,0.973-4.709,0.062-6.964c-0.484-1.197-1.199-2.244-2.08-3.104
+					l0.004-0.007L16.321,3.393l-0.005,0.003c-1.664-1.629-3.92-2.589-6.358-2.589c-1.165,0-2.31,0.223-3.396,0.66
+					C4.309,2.374,2.544,4.108,1.596,6.345c-0.949,2.235-0.971,4.709-0.061,6.96c0.538,1.33,1.368,2.467,2.388,3.38l9.274,9.272
+					c1.695,1.97,4.178,3.153,6.887,3.153c1.167,0,2.309-0.221,3.396-0.662C25.729,27.541,27.495,25.812,28.444,23.575z" />
+		<g>
+			<path fill="#E9E9E2" d="M19.267,6.264C17.731,2.46,14.09,0,9.99,0C8.709,0,7.453,0.246,6.258,0.727
+						C3.782,1.725,1.843,3.629,0.8,6.088c-1.042,2.457-1.066,5.175-0.066,7.649C2.27,17.542,5.911,20,10.01,20
+						c1.282,0,2.538-0.244,3.733-0.728c2.474-0.996,4.413-2.898,5.455-5.356C20.244,11.46,20.267,8.74,19.267,6.264z" />
+			<linearGradient id="REVERB_LEFT_HANDLER_2" gradientUnits="userSpaceOnUse" x1="2.3364" y1="3.5698" x2="17.6648"
+				y2="16.4319">
+				<stop offset="0" style="stop-color:#FFFFFF" />
+				<stop offset="1" style="stop-color:#A8A6A6" />
+			</linearGradient>
+			<path fill="url(#REVERB_LEFT_HANDLER_2)" d="M9.99,1c3.689,0,6.966,2.213,8.35,5.638c0.901,2.231,0.879,4.677-0.062,6.888
+						c-0.938,2.211-2.681,3.923-4.91,4.82C12.294,18.779,11.164,19,10.01,19c-3.689,0-6.966-2.213-8.349-5.638
+						c-0.9-2.227-0.879-4.672,0.06-6.884C2.66,4.266,4.404,2.552,6.631,1.654C7.711,1.22,8.841,1,9.99,1 M9.99,0
+						C8.709,0,7.453,0.246,6.258,0.727C3.782,1.725,1.843,3.629,0.8,6.088c-1.042,2.457-1.066,5.175-0.066,7.649
+						C2.27,17.542,5.911,20,10.01,20c1.282,0,2.538-0.244,3.733-0.728c2.474-0.996,4.413-2.898,5.455-5.356
+						c1.045-2.456,1.069-5.176,0.069-7.652C17.731,2.46,14.09,0,9.99,0L9.99,0z" />
+		</g>
+		<path fill-rule="evenodd" clip-rule="evenodd" fill="#4AB873" d="M13.749,10.003c0,2.07-1.68,3.747-3.748,3.747
+					c-2.072,0-3.75-1.677-3.75-3.75c0-2.07,1.68-3.749,3.75-3.749S13.75,7.933,13.749,10.003z" />
 	</g>
 </svg>

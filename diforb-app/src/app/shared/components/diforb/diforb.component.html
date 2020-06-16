@@ -4,8 +4,16 @@
             <div class="interface__head__wrapper">
                 <div class="left">
                     <app-mute></app-mute>
+                    <span class="selected-sound" *ngIf="selected.leftSound">
+                        <span class="icon" [ngClass]="(title | lowercase) + '-' + (library[memory.index.left].name | lowercase)"></span>
+                        <span class="sound-name">{{selected.leftSound}}</span>
+                    </span>
                 </div>
                 <div class="right">
+                    <span class="selected-sound" *ngIf="selected.rightSound">
+                        <span class="sound-name">{{selected.rightSound | lowercase}}</span>
+                        <span class="icon" [ngClass]="(title | lowercase) + '-' + (library[memory.index.right].name | lowercase)"></span>
+                    </span>
                     <app-mute></app-mute>
                 </div>
             </div>
@@ -16,7 +24,7 @@
             <tr>
                 <td class="diforb__sound left">
                     <ul>
-                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.left == i}"
+                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: memory.index.left == i}"
                             (click)="selectCategory('left', i)">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>
@@ -130,7 +138,7 @@
                 </td>
                 <td class="diforb__sound right">
                     <ul>
-                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: selected.right == i}"
+                        <li class="category" *ngFor="let category of library; let i = index;" [ngClass]="{selected: memory.index.right == i}"
                             (click)="selectCategory('right', i)">
                             <span class="icon" [ngClass]="(title | lowercase) + '-' + (category.name | lowercase)"></span>
                             <h2>{{category.name | uppercase}}</h2>

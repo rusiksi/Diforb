@@ -60,13 +60,13 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 				],
 				right: [
 					{
-						x: 40, y: 5, selected: false, title: 'room'
+						x: 145, y: 5, selected: false, title: 'room'
 					},
 					{
-						x: 60, y: 25, selected: false, title: 'hall'
+						x: 125, y: 25, selected: false, title: 'hall'
 					},
 					{
-						x: 80, y: 45, selected: false, title: 'stadium'
+						x: 105, y: 45, selected: false, title: 'stadium'
 					}
 				]
 			};

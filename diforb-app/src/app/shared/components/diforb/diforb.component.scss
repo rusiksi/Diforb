@@ -11,7 +11,7 @@ $size-handle: $size / 35;
 $url-pattern: '../../../../assets/img/png/player_pattern.png';
 $url-shadow: '../../../../assets/img/png/circle-shadow.png';
 
-$size-head: 6vh;
+$size-head: 8vh;
 $size-sound: 10vh;
 
 $color-white: white;
@@ -49,6 +49,24 @@ $padding-dropdown: 2vw;
             display: flex;
             justify-content: space-between;
             padding: 0 5rem;
+
+            .left, .right {
+                display: flex;
+                align-items: center;
+
+                .selected-sound {
+                    display: inherit;
+                    align-items: inherit;
+
+                    .icon {
+                        font-size: 5rem;
+                    }
+
+                    .sound-name {
+                        font-size: 3rem;;
+                    }
+                }
+            }
         }
     }
 
@@ -347,7 +365,7 @@ $padding-dropdown: 2vw;
                 text-align: right;
 
                 .reverb {
-                    left: 0%;
+                    right: 50%;
                 }
             }
         }

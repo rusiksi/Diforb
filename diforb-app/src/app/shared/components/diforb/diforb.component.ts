@@ -27,13 +27,14 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	public library: Library[];
 	public selected = {
 		left: 	<number> null,
-		right: 	<number> null
+		right: 	<number> null,
+		leftSound: <string>null,
+		rightSound: <string>null
 	}
 	public downloaded = {
 		left: false,
 		right: false
 	}
-	public destroyed = false;
 
 	private soundLeft: Sound = null;
 	private soundRight: Sound = null;
@@ -41,7 +42,7 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	private canvasClientRect: ClientRect;
 	private doc: Document;
 
-	private memory: Memory = {
+	public memory: Memory = {
 		side: null, 
 		index: { left: 0, right: 0 },
 		destroyed: { left: false, right: false }
@@ -228,11 +229,13 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 		console.log("[ Sound name: ] " + fullUrlSound);
 
 		if (side == 'left') {
+			this.selected.leftSound = sound;
 			this.soundLeft.AddFiles("", [{ id: fullUrlSound }]);
 			this.soundLeft.Read();
 			
 		}
 		else if (side == 'right') {
+			this.selected.rightSound = sound;
 			this.soundRight.AddFiles("", [{ id: fullUrlSound }]);
 			this.soundRight.Read();
 		}

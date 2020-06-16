@@ -1,0 +1,23 @@
+$color-circle-active: #65e36d;
+
+:host {
+    height: 50%;
+
+    svg {
+        height: inherit;  width: auto;
+        cursor: pointer;
+
+        .rectangle {
+            
+        }
+
+        circle {
+            will-change: cx;
+            transition: cx .3s;
+           
+            &.active {
+                fill: $color-circle-active;
+            }
+        }
+    }
+}
