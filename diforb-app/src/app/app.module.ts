@@ -15,6 +15,7 @@ import { PitchComponent } from './shared/components/pitch/pitch.component';
 import { MuteComponent } from './shared/components/mute/mute.component';
 
 import { AnimateInitDirective } from './directives/animate-init.directive';
+import { AccordionDirective } from './directives/accordion.directive';
 
 // import { WebAudioApiService } from './webaudioapi/webaudio.service';
 
@@ -25,7 +26,8 @@ import { AnimateInitDirective } from './directives/animate-init.directive';
 		SliderComponent,
 		PitchComponent,
 		AnimateInitDirective,
-		MuteComponent
+		MuteComponent,
+		AccordionDirective
 	],
 	imports: [
 		BrowserModule,

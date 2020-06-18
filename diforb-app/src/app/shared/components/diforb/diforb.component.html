@@ -45,7 +45,8 @@
                                 <span class="name">{{subcategory.name}}</span>
                                 
                             </div>
-                            <ul class="subcategory__sound-list" *ngIf="subcategory.child == 'sound'" [class.show]="show">
+                            <ul class="subcategory__sound-list" *ngIf="subcategory.child == 'sound'" [class.show]="show"
+                                appAccordion [appAccordionShow]="show">
                                 <li *ngFor="let sound of subcategory.data" (click)="setSound('left', [subcategory.name], sound.name)">
                                     <span>{{sound.name}}</span>
                                 </li>
@@ -88,7 +89,11 @@
                                                 <div class="player__view">
                                                     <div class="player__view__inner">
                                                         <div class="player__view__inner__holder">
-                                                            <h1 *ngIf="!isPlaying">{{title | uppercase}}</h1>
+                                                            
+                                                            <h1 *ngIf="!isPlaying">
+                                                                <div class="icon-logo"></div>
+                                                                <div>{{title | uppercase}}</div>
+                                                            </h1>
                                                             <img *ngIf="isDownload" src="assets/img/gif/metaloader.gif"
                                                                 alt="progress-download">
                                                             <canvas #canvas></canvas>

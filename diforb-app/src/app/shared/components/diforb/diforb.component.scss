@@ -214,7 +214,7 @@ $padding-dropdown: 2vw;
                         &__title {
                             
                             .icon {
-                                font-size: 3rem;
+                                font-size: 4rem;
                             }
 
                             .name {
@@ -227,12 +227,13 @@ $padding-dropdown: 2vw;
                         }
 
                         &__sound-list {
-                            height: 0;
-                            font-size: 0;
+                            // height: 0;
+                            font-size: 2rem;
 
                             &.show {
-                                height: auto;
-                                font-size: 2rem;
+                                // height: auto;
+                                
+                                // font-size: 2rem;
                             }
 
                             li {
@@ -393,6 +394,11 @@ $padding-dropdown: 2vw;
 
                     h1 {
                         margin: auto;
+
+                        .icon-logo {
+                            font-size: 15rem;
+                            line-height: .3;
+                        }
                     }
 
                     img[alt=progress-download] {
