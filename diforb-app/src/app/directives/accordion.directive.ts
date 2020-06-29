@@ -1,26 +1,29 @@
-import { Directive, Input, OnInit, OnChanges, SimpleChanges, ElementRef, AfterViewInit } from '@angular/core';
-import { gsap, Power1, Back } from 'gsap';
+import { Directive, Input, OnInit, OnChanges, SimpleChanges, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { gsap, Power1, Back, TweenMax } from 'gsap';
 
 @Directive({
   	selector: '[appAccordion]'
 })
-export class AccordionDirective implements OnInit, OnChanges, AfterViewInit {
+export class AccordionDirective implements OnInit, OnChanges, OnDestroy, AfterViewInit {
 
+	private random = gsap.utils.random(0, 0.2, 0.01);
 	private gsap = gsap.timeline();
-	private random = gsap.utils.random(0, 500, 10, true)
 	private height: number;
 	private list: HTMLCollection = null;
-	private duration = 0.1;
+	private coordX: number = null;
 
 	@Input('appAccordionShow') opened: boolean = false;
+	@Input('appAccordionSide') side: 'left' | 'right';
+	@Input('appAccordionOptions') option: { fontSize: string, duration: number, durationSlides: number };
 
 	constructor(private elementRef: ElementRef) { }
 
 	ngOnInit(): void {
-		
-		// this.gsap.to(this.elementRef.nativeElement, {
-		// 	height: 'auto', opacity: 1, fontSize: '2rem'
-		// })
+		this.coordX = (this.side == 'left') ? -100 : 100;
+	}
+
+	ngOnDestroy(): void {
+		this.gsap.kill();
 	}
 	  
 	ngOnChanges(changed: SimpleChanges): void {
@@ -35,8 +38,6 @@ export class AccordionDirective implements OnInit, OnChanges, AfterViewInit {
 				}
 			}
 		}
-		
-		console.log(changed);
 	}
 
 	ngAfterViewInit(): void {
@@ -56,23 +57,23 @@ export class AccordionDirective implements OnInit, OnChanges, AfterViewInit {
 	private show(): void {
 		this.gsap.set(this.elementRef.nativeElement, {
 			height: this.height,
-			fontSize: '2rem'
+			fontSize: this.option.fontSize + 'rem'
 		});
-		this.gsap.from(this.elementRef.nativeElement, this.duration, {
+		this.gsap.from(this.elementRef.nativeElement, this.option.duration, {
 			height: 0,
 			immediateRender: false,
-			ease: Back.easeOut
+			ease: Back.easeOut,
 		}).then(() => {
+			// gsap.utils.shuffle([].slice.call(this.list))
 			[].forEach.call(this.list, (elem, i) => {
-				this.gsap.fromTo(elem, 0.05, {
-					x: -100,
+				this.gsap.fromTo(elem, this.option.durationSlides, {
+					x: this.coordX, 
 					opacity: 0,
-					fontSize: '2rem',
-					delay: i * 0.01
+					fontSize: this.option.fontSize + 'rem'
 				}, {
 					x: 0,
 					opacity: 1,
-					fontSize: '2rem'
+					fontSize: this.option.fontSize + 'rem',
 				})
 			})
 		});
@@ -80,11 +81,11 @@ export class AccordionDirective implements OnInit, OnChanges, AfterViewInit {
 
 	private hide(): void {
 		[].forEach.call(this.list, (elem, i, a) => {
-			this.gsap.to(elem, 0.05, {
-				x: -100, opacity: 0
+			this.gsap.to(elem, this.option.durationSlides, {
+				x: this.coordX, opacity: 0
 			}).then(() => {
 				if (i == a.length - 1) {
-					this.gsap.to(this.elementRef.nativeElement, this.duration, {
+					this.gsap.to(this.elementRef.nativeElement, this.option.duration, {
 						height: 0,
 						immediateRender: false,
 						ease: Power1.easeInOut

@@ -13,6 +13,7 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	@Input('mode') mode: ModeSlider = null;
 
 	@Output('change') changedVolume: EventEmitter<number> = new EventEmitter();
+	@Output('selectReverb') changedReverb: EventEmitter<string> = new EventEmitter();
 
 	// @ViewChild('clipPath', { static: true }) clipPath: ElementRef;
 
@@ -49,24 +50,24 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 			this.reverb = {
 				left: [
 					{
-						x: 40, y: 5, selected: false, title: 'room'
+						x: 40, y: 5, selected: false, title: 'Room'
 					},
 					{
-						x: 60, y: 25, selected: false, title: 'hall'
+						x: 60, y: 25, selected: false, title: 'Hall'
 					},
 					{
-						x: 80, y: 45, selected: false, title: 'stadium'
+						x: 80, y: 45, selected: false, title: 'Stadium'
 					}
 				],
 				right: [
 					{
-						x: 145, y: 5, selected: false, title: 'room'
+						x: 145, y: 5, selected: false, title: 'Room'
 					},
 					{
-						x: 125, y: 25, selected: false, title: 'hall'
+						x: 125, y: 25, selected: false, title: 'Hall'
 					},
 					{
-						x: 105, y: 45, selected: false, title: 'stadium'
+						x: 105, y: 45, selected: false, title: 'Stadium'
 					}
 				]
 			};
@@ -155,8 +156,13 @@ export class SliderComponent implements OnInit, AfterContentInit, AfterContentCh
 	}
 
 	onClickReverb = (side: 'left' | 'right', index: number): void => {
-		this.reverb[side].forEach(v => v.selected = false);
-		this.reverb[side][index].selected = !this.reverb[side][index].selected;
+		if (this.reverb[side][index].selected) {
+			this.reverb[side][index].selected = false
+		} else {
+			this.reverb[side].forEach(v => v.selected = false);
+			this.reverb[side][index].selected = !this.reverb[side][index].selected;
+		}
+		this.changedReverb.emit(this.reverb[side][index].selected ? this.reverb[side][index].title : '')
 	}
 }
 

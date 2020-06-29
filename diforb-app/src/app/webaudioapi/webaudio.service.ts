@@ -44,9 +44,9 @@ export class WebAudioApiService {
         // Object.setPrototypeOf(Convolver.prototype, new WebApiBase);
         
         Convolver.prototype.Buffers = {
-            Stadium: new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.stadium),
-            Hall: new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.hall),
-            Room: new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.room)
+            Stadium:    new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.stadium),
+            Hall:       new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.hall),
+            Room:       new ConvolverBuffer(DiforbConstans.ConvolverBufferPath.room)
         };
 
         Convolver.prototype.FillBuffers = function () {
@@ -72,7 +72,7 @@ export class WebAudioApiService {
             });
         };
 
-        // Convolver.prototype.FillBuffers();
+        Convolver.prototype.FillBuffers();
 
 		//--- End of Convolver base sounds
         return this;

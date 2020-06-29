@@ -118,6 +118,29 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 		else if (type == 'right-top') this.soundRight.SetVolume(value);
 	}
 
+	public changedPitch = (value: number, side: Side): void => {
+		let v = 0.1 * value + 0.5;
+
+		if (side == Side.Left) {
+			this.webAudioApiService.library.LeftSide.SetPitch(v)
+		} else if (side == Side.Right) {
+			this.webAudioApiService.library.RightSide.SetPitch(v);
+		} else {
+			console.warn('Не известная сторона!')
+		}
+	}
+
+	public changedModeReverb = (mode: string, side: Side) => {
+		console.log(mode);
+		if (side == Side.Left) {
+			this.webAudioApiService.library.LeftSide.SetConvolver(mode);
+		} else if (side == Side.Right) {
+
+		} else {
+			console.warn('Не известная сторона!');
+		}
+	}
+
 	private drawAudioWave = (channelData): void => {
 		if (this.canvas == null) return;
 
@@ -258,6 +281,11 @@ interface Memory {
 	side: string,
 	index: { left: number, right: number },
 	destroyed: { left: boolean, right: boolean } 
+}
+
+enum Side {
+	Left = 'left',
+	Right = 'right'
 }
 
 

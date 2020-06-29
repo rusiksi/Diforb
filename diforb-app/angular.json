@@ -33,7 +33,8 @@
             "scripts": [
               "src/assets/libs/jquery/jquery-1.11.3.min.js",
               "src/assets/libs/jquery/jquery-ui-1.9.2.custom.min.js",
-              "src/assets/libs/jquery/jquery.knob.min.js"
+              "src/assets/libs/jquery/jquery.knob.min.js",
+              "src/assets/libs/js/splitText.js"
             ],
              "stylePreprocessorOptions": {
                "includePaths": ["src/assets/styles"]

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 
 declare const jQuery;
 
@@ -14,6 +14,8 @@ export class PitchComponent implements OnInit, AfterContentInit {
 	@ViewChild('inputRef', {static: true}) input: ElementRef;
 
 	@Input('mode') mode: Mode;
+
+	@Output('change') pitchEmit: EventEmitter<number> = new EventEmitter();
 
 	constructor(private elementRef: ElementRef) { }
 
@@ -41,7 +43,7 @@ export class PitchComponent implements OnInit, AfterContentInit {
 			lineCap: 'round',
 			bgColor: 'none',
 			fgColor: '#919395',
-			thickness: .1,
+			thickness: .2,
 			displayInput: false,
 			angleOffset: -125,
 			angleArc: 250,
@@ -51,10 +53,10 @@ export class PitchComponent implements OnInit, AfterContentInit {
 					fgColor: (v == 5) ? '#919395' : '#2eca75',
 					step: (v < 6 && v > 4) ? 1 : 0.1
 				});
-			},
-			change: function (v: number) {
-				// console.log(arguments)
 				
+			},
+			change: (v: number) => {
+				this.pitchEmit.emit(v);
 			},
 			draw: function() {
 				(mode == 'left') ? this.$c.css('margin-left', '13%') : this.$c.css('margin-right', '31%');

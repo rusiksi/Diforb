@@ -16,8 +16,14 @@ import { MuteComponent } from './shared/components/mute/mute.component';
 
 import { AnimateInitDirective } from './directives/animate-init.directive';
 import { AccordionDirective } from './directives/accordion.directive';
+import { SplitTextDirective } from './directives/split-text.directive';
 
 // import { WebAudioApiService } from './webaudioapi/webaudio.service';
+
+// import { gsap } from 'gsap';
+// import { CSSRulePlugin } from 'gsap/CSSRulePlugin';
+
+// gsap.registerPlugin(CSSRulePlugin);
 
 @NgModule({
 	declarations: [
@@ -27,7 +33,8 @@ import { AccordionDirective } from './directives/accordion.directive';
 		PitchComponent,
 		AnimateInitDirective,
 		MuteComponent,
-		AccordionDirective
+		AccordionDirective,
+		SplitTextDirective
 	],
 	imports: [
 		BrowserModule,
