@@ -1,24 +1,42 @@
+// @mixin blueprintGrid {
+//     background-color:  #5ec7e1;
+//     background-image:   linear-gradient(rgba(255, 255, 255, .2) 2px, transparent 2px),
+//                         linear-gradient(90deg, rgba(255, 255, 255, .2) 2px, transparent 2px),
+//                         linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+//                         linear-gradient(90deg, rgba(255, 255, 255, .2) 1px, transparent 1px),
+//                         linear-gradient(rgba(255, 255, 255, .1) 1px, transparent 1px),
+//                         linear-gradient(90deg, rgba(255, 255, 255, .1) 1px, transparent 1px);
+//     background-size:    100px 100px,
+//                         100px 100px,
+//                         20px 20px,
+//                         20px 20px,
+//                         10px 10px,
+//                         10px 10px;
+//     background-position:    -2px 5px,
+//                             5px -2px,
+//                             -1px 6px,
+//                             6px -1px,
+//                             0px -4px,
+//                             -4px 0px;
+// }
 @mixin blueprintGrid {
     background-color: #5ec7e1;
-    background-image: linear-gradient(rgba(255, 255, 255, .2) 2px, transparent 2px),
-                    linear-gradient(90deg, rgba(255, 255, 255, .2) 2px, transparent 2px),
-                    linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, .2) 1px, transparent 1px),
-                    linear-gradient(rgba(255, 255, 255, .1) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(255, 255, 255, .1) 1px, transparent 1px);
-    background-size:    100px 100px,
-                        100px 100px,
-                        20px 20px,
-                        20px 20px,
-                        10px 10px,
-                        10px 10px;
-    background-position:    -2px 5px,
-                            5px -2px,
-                            -1px 6px,
-                            6px -1px,
-                            0px -4px,
-                            -4px 0px;
+    background-image:   linear-gradient(rgba(255, 255, 255, .2) 2px, transparent 2px),
+                        linear-gradient(90deg, rgba(255, 255, 255, .2) 2px, transparent 2px),
+                        linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, .2) 1px, transparent 1px),
+                        linear-gradient(rgba(255, 255, 255, .1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255, 255, 255, .1) 1px, transparent 1px);
+    background-size:    2px 50%,
+                        50% 2px,
+                        1px 10%,
+                        10% 1px,
+                        1px 5%,
+                        5% 1px;
+    // background-position:    -2px 0px,
+                            // 0px -2px;
 }
+
 
 @mixin whitePrintGrad {
     background: rgb(255, 255, 255);

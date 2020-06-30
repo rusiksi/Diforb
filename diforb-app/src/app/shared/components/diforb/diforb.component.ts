@@ -20,6 +20,7 @@ import { gsap, TweenMax } from 'gsap';
 export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked {
 
 	@ViewChild('canvas', { static: true }) canvas: ElementRef;
+	private ctx: CanvasRenderingContext2D;
 	
 	public title: string = 'Interface';
 	public isPlaying = false;
@@ -76,7 +77,12 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 
 	ngAfterContentInit(): void {
 		this.canvasClientRect = this.canvas.nativeElement.getBoundingClientRect();
+		this.ctx = this.canvas.nativeElement.getContext('2d');
 		console.log('After Content Init');
+		console.log('Canvas height: ' + this.ctx.canvas.height + ' PX');
+		this.ctx.canvas.width = this.canvasClientRect.width;
+		this.ctx.canvas.height = this.canvasClientRect.width;
+		console.log('Canvas height: ' + this.ctx.canvas.height + ' PX');
 	}
 
 	ngAfterContentChecked(): void {
@@ -94,9 +100,7 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 
 	public onPlay = (): void => {
 		this.isPlaying = !this.isPlaying;
-		this.isPlaying ? 
-		this.webAudioApiService.library.Play() :
-			this.webAudioApiService.library.Stop();
+		this.isPlaying ? this.webAudioApiService.library.Play() : this.webAudioApiService.library.Stop();
 
 		if (!this.isPlaying) {
 			this.webAudioApiService.library.SoundAnalizer.UnSubscribe(this.drawAudioWave);
@@ -144,15 +148,14 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 	private drawAudioWave = (channelData): void => {
 		if (this.canvas == null) return;
 
-		let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d'),
-			max = 51, k = this.canvasClientRect.width / max;
+		let max = 50, k = this.ctx.canvas.width / max;
 		
-		ctx.clearRect(0, 0, this.canvasClientRect.width, this.canvasClientRect.height);
+		this.clearAudioWave();
 
 		for (let i = 0; i < max; i++) {
-			let z = Math.round(channelData.length / 68) * i,
+			let z = Math.round(channelData.length / max) * i,
 				x1 = i * k,
-				y = Math.abs(channelData[z]) * 504;
+				y = Math.abs(channelData[z]) * max * 4;
 
 			if (i >= 0 && i <= 10) {
 				y += Math.round(y * 0.2);
@@ -172,7 +175,7 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 								if (i > 31 && i <= 41) {
 									y += Math.round(y * 0.5);
 								} else {
-									if (i > 41 && i <= 51) {
+									if (i > 41 && i <= max) {
 										y += Math.round(y * 0.2);
 									}
 								}
@@ -182,22 +185,21 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 				}
 			}
 
-			let y1 = 78 - Math.abs(y / 2),
-				gradient = ctx.createLinearGradient(0, 0, 0, y);
+			let y1 = (this.canvasClientRect.height / 2) - Math.abs(y / 2),
+			gradient = this.ctx.createLinearGradient(0, 0, 0, y);
 
 			gradient.addColorStop(0, '#ccf5fb');
 			gradient.addColorStop(0.45, '#FFFFFF');
 			gradient.addColorStop(0.55, '#FFFFFF');
 			gradient.addColorStop(1, '#ccf5fb');
 
-			ctx.fillStyle = gradient;
-			ctx.fillRect(x1, y1, 3, y);
+			this.ctx.fillStyle = gradient;
+			this.ctx.fillRect(x1, y1, 3, y);
 		}
 	}
 
 	private clearAudioWave = (): void => {
-		let ctx: CanvasRenderingContext2D = this.canvas.nativeElement.getContext('2d');
-		ctx.clearRect(0, 0, this.canvasClientRect.width, this.canvasClientRect.height);
+		this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
 	}
 
 	private setIconsFont(): void {
@@ -237,8 +239,8 @@ export class DiforbComponent implements OnInit, OnDestroy, OnChanges, AfterConte
 		this.soundLeft = libSideLeft.Sounds['[Left Side]'],
 		this.soundRight = libSideRight.Sounds['[Right Side]'];
 
-		this.soundLeft.SetVolume(0);
-		this.soundRight.SetVolume(0);
+		this.soundLeft.SetVolume(50);
+		this.soundRight.SetVolume(50);
 
 		this.subscribed.push(this.soundLeft.Spinner.loaderState.subscribe(event => this.downloaded.left = event.show));
 		this.subscribed.push(this.soundRight.Spinner.loaderState.subscribe(event => this.downloaded.right = event.show));

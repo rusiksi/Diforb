@@ -36,7 +36,7 @@ export class SoundAnalizer {
 
     UnSubscribe = (vizualizer) => {
         let indexVizualizer = this.visualizers.indexOf(vizualizer);
-        if (indexVizualizer > -1) this.visualizers.splice(indexVizualizer, 1);
+        if (~indexVizualizer) this.visualizers.splice(indexVizualizer, 1);
     }
 
 }
