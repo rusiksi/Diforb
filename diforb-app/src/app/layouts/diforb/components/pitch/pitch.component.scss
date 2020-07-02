@@ -1,0 +1,36 @@
+:host {
+    display: block;
+    width: 100%; height: 100%;
+
+    &[mode=left] {
+        padding-top: 10%;
+        padding-left: 22%;
+    }
+
+    &[mode=right] {
+        padding-top: 10%;
+        padding-left: 41%;
+    }
+
+    .pitch-wrap {
+        position: relative;
+
+        svg {
+            position: absolute;
+            width: 100%; height: auto;
+            pointer-events: none;
+        }
+
+        &.left {}
+
+        &.right {
+
+            svg {
+                right: 0;
+            }
+        }
+    }
+
+    
+}
+
