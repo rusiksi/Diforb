@@ -1,0 +1,14 @@
+
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+
+    &__links {
+        display: inherit;
+        flex-direction: inherit;
+        flex-grow: 1;
+        justify-content: center;
+    }
+}

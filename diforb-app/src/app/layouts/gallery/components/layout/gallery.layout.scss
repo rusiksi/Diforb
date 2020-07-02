@@ -1,0 +1,18 @@
+$width-sidebar: 260px;
+$width-container: 1200px;
+
+table {
+    border: 1px solid red;
+    width: $width-container;
+    height: 100%;
+    margin: auto;
+
+    // app-sidebar {
+    //     display: block;
+    //     width: $width-sidebar;
+    // }
+
+    .sidebar {
+        width: $width-sidebar;
+    }
+}

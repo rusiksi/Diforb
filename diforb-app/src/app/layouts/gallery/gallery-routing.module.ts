@@ -17,9 +17,8 @@ const routes: Routes = [
                 component: GalleryComponent,
                 children: [
                     {
-                        path: 'gallery/:name',
-                        component: LibraryComponent,
-                        outlet: 'library'
+                        path: ':name',
+                        component: LibraryComponent
                     }
                 ]
             },

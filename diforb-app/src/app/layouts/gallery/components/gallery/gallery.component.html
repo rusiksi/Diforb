@@ -1,6 +1,10 @@
 <div class="library">
-    <router-outlet name="library"></router-outlet>
+    <router-outlet></router-outlet>
 </div>
 <div class="gallery">
-    
+    <ul>
+        <li *ngFor="let item of libraries">
+            <a [routerLink]="[item.name]" routerLinkActive="router-link-active">{{item.name}}</a>
+        </li>
+    </ul>
 </div>

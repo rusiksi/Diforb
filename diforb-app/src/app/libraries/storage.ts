@@ -965,13 +965,13 @@ export const LibrariesStorage = {
         ]
     },
 
-    "Natural-Ambience": [],
+    "Natural-Ambience": {},
 
-    "Pick Up": [],
+    "Pick Up": {},
 
-    "Puzzle": [],
+    "Puzzle": {},
 
-    "Zoo": []
+    "Zoo": {}
 }
 
 
