@@ -1,14 +1,78 @@
-
+@import 'mixins';
+@import 'variables';
 
 .sidebar {
     display: flex;
     flex-direction: column;
     min-height: 100%;
 
+    &__link {
+        line-height: 3.5;
+    }
+
     &__links {
         display: inherit;
         flex-direction: inherit;
         flex-grow: 1;
         justify-content: center;
+        background-color: $bgroundBlack2;
     }
+
+    &__social {
+        font-size: 24px;
+        
+        i {
+            margin: 0 20px;
+            line-height: 2.5;
+        }
+    }
+
+    
+
+    &__logo {
+        height: $heightHeader;
+        font-size: 160px;
+        overflow: hidden;
+
+        i {
+            position: relative;
+            top: -55px;
+        }
+    }
+
+    &__user {
+        border-bottom: 1px solid $colorBlueDark;
+
+        &__profile {
+            display: flex;
+
+            .icon-avatar {
+                font-size: 70px;
+                
+            }
+
+            div {
+                align-self: center;
+            }
+        }
+    }
+
+    &__logo, &__link {
+        background-color: $bgroundBlack5;
+        border-bottom: 1px solid $colorBlueDark;
+    }
+
+    &__user, &__social {
+        background-color: $bgroundBlack6;
+    }
+
+    &__links, &__link, &__user {
+        @extend %paddingLeft;
+    }
+
+
+}
+
+%paddingLeft {
+    padding-left: 25px;
 }

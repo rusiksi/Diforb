@@ -7,13 +7,19 @@
 html, body {
     margin: 0;
     height: 100%;
-    font: 400 12px/1.4 'Play',  Arial,  Tahoma,  Verdana, sans-serif;
+    font: 400 18px/1.4 'Play',  Arial,  Tahoma,  Verdana, sans-serif;
+    // font: 400 12px/1.4 'Play', Arial, Tahoma, Verdana, sans-serif;
 }
 
-@media (min-width: $screen-md-min) {
-    html, body {
-        font: 400 1vh/1.4 'Play', Arial, Tahoma, Verdana, sans-serif;
-    }
+// @media (min-width: $screen-md-min) {
+//     html, body {
+//         font: 400 1vh/1.4 'Play', Arial, Tahoma, Verdana, sans-serif;
+//     }
+// }
+
+body {
+    color: white;
+    @include blueRadialbckground;
 }
 
 *, :before, :after {
@@ -73,4 +79,13 @@ ul {
             opacity: 1;
         }
     }
+}
+
+.text {
+
+    &__left {text-align: left;}
+
+    &__center {text-align: center;}
+
+    &__right {text-align: right;}
 }

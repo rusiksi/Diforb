@@ -4,7 +4,13 @@
             <app-sidebar></app-sidebar>
         </td>
         <td class="main" valign="top">
-            <header>Header</header>
+            <header>
+                <span *ngIf="breadConfig.icon" [ngClass]="breadConfig.icon"></span>
+                <span>{{breadConfig.breadcrumbs}}</span>
+                <span *ngIf="breadConfig.child">
+                    <span>/</span><span>{{breadConfig.child}}</span>
+                </span>
+            </header>
             <main>
                 <router-outlet></router-outlet>
             </main>

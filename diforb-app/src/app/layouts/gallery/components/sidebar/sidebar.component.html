@@ -1,18 +1,46 @@
 <div class="sidebar">
-    <div class="sidebar__logo">Diforb</div>
-    <div class="sidebar__user">Hello</div>
-    <div class="sidebar__link">Libraries</div>
-    <div class="sidebar__link">How it works</div>
+    <div class="sidebar__logo">
+        <i class="icon-diforb-logo"></i>
+    </div>
+    <div class="sidebar__user">
+        <div *ngIf="true">
+            <div class="text__right">
+                <i class="icon-cog"></i>
+            </div>
+            <div class="sidebar__user__profile">
+                <div class="icon-avatar"></div>
+                <div>
+                    <div>Hello</div>
+                    <div>sekhno@iclode.com</div>
+                </div>
+            </div>
+            <div class="text__right">
+                <i class="icon-logout"></i>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar__link" routerLink="/gallery" routerLinkActive="router-link-active" >
+        <i class="icon-libs"></i>
+        <span>Libraries</span>
+    </div>
+    <div class="sidebar__link" routerLink="/tutorial" routerLinkActive="router-link-active">
+        <i class="icon-play"></i>
+        <span>Watch Tutorial</span>
+    </div>
+    <div class="sidebar__link" routerLink="/faq" routerLinkActive="router-link-active">
+        <i class="icon-info"></i>
+        <span>F.A.Q.</span>
+    </div>
     <ul class="sidebar__links">
-        <li>License agreement</li>
+        <li routerLink="/license" routerLinkActive="router-link-active">License agreement</li>
         <li>Freesound</li>
         <li>Privacy policy</li>
         <li>Support</li>
         <li>Get in touch</li>
     </ul>
-    <div class="sidebar__social">
-        <span class="facebook"></span>
-        <span class="google"></span>
-        <span class="twitter"></span>
+    <div class="sidebar__social text__right">
+        <i class="icon-facebook"></i>
+        <i class="icon-google"></i>
+        <i class="icon-twitter"></i>
     </div>
 </div>
