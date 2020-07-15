@@ -1,0 +1,100 @@
+@import 'mixins';
+@import 'variables';
+
+.gallery {
+    background-color: $bgroundBlack2;
+}
+
+.wrapper {
+
+    padding: 5px;
+
+    h3 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .price {
+            float: right;
+        }
+    }
+    
+    
+
+    figure {
+        position: relative;
+        overflow: hidden;
+        font-size: 0;
+
+        img {
+            width: 100%;
+            transform: scale(1.1);
+            transform-origin: center;
+            transition: transform .3s ease;
+        }
+
+        figcaption {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            visibility: hidden;
+        }
+
+        &:hover {
+
+            img {
+                transform: scale(1);
+            }
+
+            figcaption {
+                visibility: visible;
+            }
+        }
+    }
+
+    .controll {
+        padding: 10px;
+        background-color: $bgroundBlack6;
+
+        .buttons {
+            
+            color: $colorGreen;
+
+            .launch {
+                float: right;
+                line-height: 38px;
+                border-radius: 25px;
+                padding: 0 20px;
+                font-weight: bold;
+                border: 1px solid $colorGreen;
+            }
+            
+            .play {
+                span {
+                    position: relative;
+                    top: 2px;
+                    padding-left: 10px;
+                }
+
+                .icon-play-radial {
+                    font-size: 40px;
+                }
+            } 
+
+            .play, .icon-play-radial, .launch {
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .progress {
+        height: 5px;
+        background-color: $colorGreen;
+    }
+
+    h3, figcaption, .launch {
+        text-transform: uppercase;
+    }
+}

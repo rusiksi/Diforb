@@ -6,6 +6,7 @@ import { LibraryComponent } from './components/library/library.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { LicenseComponent } from './components/license/license.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 const routes: Routes = [
     {
@@ -49,7 +50,8 @@ const routes: Routes = [
                 path: 'freesound'
             },
             {
-                path: 'privacy'
+                path: 'privacy',
+                component: PrivacyComponent
             },
             {
                 path: 'support'

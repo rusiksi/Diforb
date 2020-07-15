@@ -5,7 +5,6 @@
 // @import'jquery-ui-custom';
 
 html, body {
-    margin: 0;
     height: 100%;
     font: 400 18px/1.4 'Play',  Arial,  Tahoma,  Verdana, sans-serif;
     // font: 400 12px/1.4 'Play', Arial, Tahoma, Verdana, sans-serif;
@@ -40,8 +39,10 @@ ul {
 
 table {
     border-collapse: collapse;
+    border-spacing: 0px;
 }
 
+html, body, figure,
 h1, h2, h3, h4, h5 {
     margin: 0;
 }
@@ -56,17 +57,18 @@ h2 {
 
 h3 {
     font-size: 1rem;
+    font-weight: 100;
 }
 
-ul {
+* {
 
     &::-webkit-scrollbar {
         width: 2px;
-        background-color: red;
+        background-color: $bgroundBlack2;
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: green;
+        background-color: $bgroundBlack6;
     }
 
     &::-webkit-scrollbar-button:increment,
@@ -88,4 +90,9 @@ ul {
     &__center {text-align: center;}
 
     &__right {text-align: right;}
+}
+
+.content {
+    height: $heightContent;
+    overflow: auto;
 }

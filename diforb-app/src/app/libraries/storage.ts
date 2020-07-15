@@ -12,25 +12,44 @@ export interface Library {
 }
 
 export const LibrariesStorage = {
-    "Birds": {},
+    "Birds": {
+        image: "birds"
+    },
 
-    "Cats-N-Dogs": {},
+    "Cats-N-Dogs": {
+        image: "cats-and-dogs"
+    },
 
-    "Creatures": {},
+    "Creatures": {
+        image: "creatures"
+    },
 
-    "Destruction": {},
+    "Destruction": {
+        image: "destruction"
+    },
 
-    "Explosions": {},
+    "Explosions": {
+        image: "explosions"
+    },
 
-    "Falling": {},
+    "Falling": {
+        image: "falling"
+    },
 
-    "Farm": {},
+    "Farm": {
+        image: "farm"
+    },
 
-    "Food": {},
+    "Food": {
+        image: "food"
+    },
 
-    "Footsteps": {},
+    "Footsteps": {
+        image: "footsteps"
+    },
 
     "Interface": {
+        image: "interface",
         data: [
             {
                 name: 'Designed',
@@ -965,13 +984,21 @@ export const LibrariesStorage = {
         ]
     },
 
-    "Natural-Ambience": {},
+    "Natural-Ambience": {
+        image: "ambience"
+    },
 
-    "Pick Up": {},
+    "Pick Up": {
+        image: "pick-up"
+    },
 
-    "Puzzle": {},
+    "Puzzle": {
+        image: "puzzle"
+    },
 
-    "Zoo": {}
+    "Zoo": {
+        image: "zoo"
+    }
 }
 
 

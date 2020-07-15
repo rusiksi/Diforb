@@ -9,6 +9,7 @@ import { LibraryComponent } from './components/library/library.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { LicenseComponent } from './components/license/license.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 import { BreadcrumbsService } from '@app/services/breadcrumbs.service';
 
@@ -20,7 +21,8 @@ import { BreadcrumbsService } from '@app/services/breadcrumbs.service';
         LibraryComponent,
         TutorialComponent,
         LicenseComponent,
-        FaqComponent
+        FaqComponent,
+        PrivacyComponent
     ],
     imports: [
         CommonModule,

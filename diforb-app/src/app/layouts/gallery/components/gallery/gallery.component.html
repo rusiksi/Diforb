@@ -1,10 +1,33 @@
 <div class="library">
     <router-outlet></router-outlet>
 </div>
-<div class="gallery">
-    <ul>
-        <li *ngFor="let item of libraries">
-            <a [routerLink]="[item.name ]" routerLinkActive="router-link-active">{{item.name}}</a>
-        </li>
-    </ul>
+<div class="gallery content">
+    <table>
+        <tr *ngFor="let row of libraries">
+            <td *ngFor="let col of row; let play = false;">
+                <!-- <a [routerLink]="[col.name]" routerLinkActive="router-link-active">{{col.name}}</a> -->
+                <!-- <a [routerLink]="[col.name]" routerLinkActive="router-link-active">{{col.name}}</a> -->
+                <div class="wrapper">
+                    <figure>
+                        <img [src]="'./assets/img/covers/' + (col.image | lowercase) + '.jpg'" alt="cover">
+                        <figcaption>Click for details!</figcaption>
+                    </figure>
+                    <div class="controll">
+                        <h3>
+                            <span>{{col.name}} </span>
+                            <span class="price">Free</span>
+                        </h3>
+                        <div class="buttons">
+                            <span class="play">
+                                <i class="icon-play-radial"></i>
+                                <span>Demo</span>
+                            </span>
+                            <span class="launch">Launch</span>
+                        </div>
+                    </div>
+                    <div class="progress"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>

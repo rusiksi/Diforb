@@ -6,8 +6,19 @@
     flex-direction: column;
     min-height: 100%;
 
+    .router-link-active {
+        color: $colorGreen;
+    }
+
     &__link {
+        display: flex;
+        align-items: center;
         line-height: 3.5;
+
+        i {
+            font-size: 1.5em;
+            margin-right: 20px;
+        }
     }
 
     &__links {
@@ -76,3 +87,4 @@
 %paddingLeft {
     padding-left: 25px;
 }
+
