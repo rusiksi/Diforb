@@ -13,43 +13,57 @@ export interface Library {
 
 export const LibrariesStorage = {
     "Birds": {
-        image: "birds"
+        image: "birds",
+        description: "Here you can find variety of birds sounds such as crows, parrots, chickens and others.",
+        price: 0
     },
 
     "Cats-N-Dogs": {
-        image: "cats-and-dogs"
+        image: "cats-and-dogs",
+        description: "Here is a huge set of barking, growl, howl, hissing, snore and other sounds which are made by cats and dogs.",
+        price: 0
     },
 
     "Creatures": {
-        image: "creatures"
+        image: "creatures",
+        description: "Zombies, orcs, goblins and other mystical beings are already almost ready to break away from your loudspeakers and become a part of your project."
     },
 
     "Destruction": {
-        image: "destruction"
+        image: "destruction",
+        description: "In this library sounds of various objects blows, breaking, and destructions are presented. Wooden, metal, plastic, paper and other elements will break at your command. This library is perfectly suitable for movies, ads and video games."
     },
 
     "Explosions": {
-        image: "explosions"
+        image: "explosions",
+        description: "Here you can find a full set of sounds to create a maximum amount of noise.",
+        price: 0
     },
 
     "Falling": {
-        image: "falling"
+        image: "falling",
+        description: "Here you can hear sounds of various objects falling . First-aid kits, backpacks, guns, rifles, keys, coins and many other things will fall under your direction. These sounds are perfectly  suitable for games, commercials and animation video."
     },
 
     "Farm": {
-        image: "farm"
+        image: "farm",
+        description: "This library is dedicated to different farm animals.You can find here all you need to recreate farm soundscape.It features 8 animal species  sounds with multiple variations for each animal.",     
+        price: 0
     },
 
     "Food": {
-        image: "food"
+        image: "food",
+        description: "We recorded different  sounds related to food and its cooking.Chewing, swallowing , boiling and many other sounds are waiting for you in the library ."
     },
 
     "Footsteps": {
-        image: "footsteps"
+        image: "footsteps",
+        description: "The library includes three submenus - walking, running and landing. Besides, a large number of men's and women's shoes you can find steps of various beings presented in a sound set - paws, hoofs, robots, retro sounds. Combining different steps with various additional sounds, you have a chance to reproduce the movement of any object on the screen most precisely."
     },
 
     "Interface": {
         image: "interface",
+        description: "The interface is a new and convenient way to create GUI sounds for games, applications, advertising, presentations and many other media projects. By means of the unique system of sound combination and processing, you can create original clicks, popups, swipes and many other sounds to polish up your project.",
         data: [
             {
                 name: 'Designed',
@@ -985,19 +999,23 @@ export const LibrariesStorage = {
     },
 
     "Natural-Ambience": {
-        image: "ambience"
+        image: "ambience",
+        description: "Natural Ambience is a universal collection of high-quality sounds which can help you create the sound atmosphere of various locations such as a city, a forest, a beach, a cave, the underwater world and many other things. Thanks to the unique system of combination, you get the opportunity to create hundreds of original sounds."
     },
 
     "Pick Up": {
-        image: "pick-up"
+        image: "pick-up",
+        description: "The majority of games make you grab various objects and artifacts to go ahead. In this library, you can find sounds reproducing picking up different stuff like first-aid kits, cartridges, coins, the weapon and other important objects. These sounds are perfectly suitable for games of any genres."
     },
 
     "Puzzle": {
-        image: "puzzle"
+        image: "puzzle",
+        description: "In this library sounds of unsolved riddles, detective investigations, figures row collecting, various puzzles and other adventures are hidden. Also, here you can find musical jingles to strengthen pleasure from victories and smooth grief from defeats."
     },
 
     "Zoo": {
-        image: "zoo"
+        image: "zoo",
+        description: "Here you can hear sounds of various wild and dangerous animals.You don't  need to risk your health in order to record them - we did it for you. "
     }
 }
 

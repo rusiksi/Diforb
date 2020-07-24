@@ -1,0 +1,51 @@
+@import 'variables';
+
+.form {
+    width: $width-form;
+    padding: 0 30px 30px;
+    text-align: center;
+    font-size: 15px;
+
+    p {
+        i {
+            font-size: 8rem;;
+        }
+    }
+
+    .button {
+
+        i {
+            font-size: 22px;
+            margin-right: 20px;
+        }
+
+        span {
+            // font-size: 15px;
+        }
+        
+        &__facebook {
+            background-color: $colorFacebook;
+        }
+
+        &__google {
+            background-color: $colorGoogle;
+        }
+
+        &__login {
+            background-color: $colorLogin;
+        }
+
+        &__watch {
+            background-color: $colorBlack;
+        }
+
+        i, span {
+            vertical-align: middle;
+            line-height: 46px;
+        }
+    }
+}
+
+.form, .button {
+    border-radius: 3px;
+}

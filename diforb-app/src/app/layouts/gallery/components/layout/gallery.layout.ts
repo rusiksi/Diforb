@@ -3,6 +3,7 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BreadcrumbsService } from '@app/services/breadcrumbs.service';
+import { setIconsFont } from '@app/utilites/icons';
 
 @Component({
     selector: 'app-gallery',
@@ -11,8 +12,6 @@ import { BreadcrumbsService } from '@app/services/breadcrumbs.service';
 })
 
 export class GalleryLayoutComponent implements OnInit {
-
-    private doc: Document;
 
     public breadConfig = {};
 
@@ -23,9 +22,9 @@ export class GalleryLayoutComponent implements OnInit {
         private breadcrumb: BreadcrumbsService
     ) {
         console.log('[Gallery layout constructor]:');
-        this.doc = doc;
+       
 
-        this.setIconsFont();
+        setIconsFont(doc);
 
         activatedRoute.root.data.subscribe(res => console.log(res))
 
@@ -40,21 +39,6 @@ export class GalleryLayoutComponent implements OnInit {
     }
 
     ngOnInit() { }
-
-
-    private setIconsFont(): void {
-        let link = this.doc.createElement('link'),
-            css = {
-                href: 'assets/libs/css/icons/Diforb_ui/style.css',
-                type: 'text/css',
-                rel: 'stylesheet'
-            };
-
-        for (let key in css) link.setAttribute(key, css[key]);
-
-        this.doc.head.appendChild(link);
-    }
-
     
 }
 

@@ -11,12 +11,6 @@ $btn-color-disabled-hover: #65e36d;
 $btn-color-shadow-disabled: #66ec06;
 
 
-
-// $min-width-player: 623px;
-// $size: 80vh;
-// $size-third: $size / 3;
-// $size-handle: $size / 35;
-
 $screen-xs-min: 480px;
 $screen-sm-min: 581px;
 $screen-sm-min2: 758px;
@@ -24,18 +18,29 @@ $screen-md-min: 1002px;
 $screen-lg-min: 1490px;
 
 
-
+$bgroundBlack0: rgba(0, 0, 0, 0);
 $bgroundBlack2: rgba(0, 0, 0, 0.2);
+$bgroundBlack3: rgba(0, 0, 0, 0.3);
 $bgroundBlack5: rgba(0, 0, 0, 0.5);
 $bgroundBlack6: rgba(0, 0, 0, 0.6);
 $colorBlueDark: #276585;
 $colorGreen: #52d669;
+$colorGreenDark: #277a54;
+$colorFacebook: #5692d1;
+$colorGoogle: #e06746;
+$colorLogin: #00cd99;
+$colorBlack: #263440;
 
 $heightHeader: 70px;
 $heightContent: calc(100vh - 70px);
+$heightContentWithFooter: calc(100vh - 140px);
 
 $width-sidebar: 315px;
 $width-container: 1500px;
+$width-container-small: 1200px;
+$width-form: 350px;
+
+$lineGradForm: linear-gradient(to bottom, $bgroundBlack3 0, $bgroundBlack0 100%);
 
 
 

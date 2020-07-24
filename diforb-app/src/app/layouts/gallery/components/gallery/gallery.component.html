@@ -1,15 +1,13 @@
 <div class="library">
     <router-outlet></router-outlet>
 </div>
-<div class="gallery content">
+<div class="gallery content" [style.opacity]="imageLoaded?1:0">
     <table>
         <tr *ngFor="let row of libraries">
-            <td *ngFor="let col of row; let play = false;">
-                <!-- <a [routerLink]="[col.name]" routerLinkActive="router-link-active">{{col.name}}</a> -->
-                <!-- <a [routerLink]="[col.name]" routerLinkActive="router-link-active">{{col.name}}</a> -->
+            <td *ngFor="let col of row;">
                 <div class="wrapper">
-                    <figure>
-                        <img [src]="'./assets/img/covers/' + (col.image | lowercase) + '.jpg'" alt="cover">
+                    <figure [routerLink]="[col.name]" routerLinkActive="router-link-active">{{col.name}}>
+                        <img [src]="'./assets/img/covers/' + (col.image | lowercase) + '.jpg'" alt="cover" (load)="onLoad(col.image)">
                         <figcaption>Click for details!</figcaption>
                     </figure>
                     <div class="controll">
@@ -18,14 +16,14 @@
                             <span class="price">Free</span>
                         </h3>
                         <div class="buttons">
-                            <span class="play">
-                                <i class="icon-play-radial"></i>
+                            <span class="play" (click)="onPlay(col)">
+                                <i [ngClass]="{'icon-pause-radial': col.play, 'icon-play-radial': !col.play}"></i>
                                 <span>Demo</span>
                             </span>
                             <span class="launch">Launch</span>
                         </div>
                     </div>
-                    <div class="progress"></div>
+                    <div class="progress" (click)="clickProgress($event, col)"><div class="range" [style.width]="col.readed + '%'"></div></div>
                 </div>
             </td>
         </tr>

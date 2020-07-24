@@ -1,6 +1,14 @@
 <div>
     <figure>
         <img [src]="'./assets/img/covers/' + (name | async | lowercase) + '.jpg'" alt="cover">
-        <h1>{{name | async}}</h1>
+        <figcaption>{{name | async}}</figcaption>
     </figure>
+    <div class="controll">
+        <i class="icon-play-radial"></i>
+    </div>
+</div>
+<div>
+    <h1>{{name | async}}</h1>
+    <div class="author"></div>
+    <p class="desc"></p>
 </div>

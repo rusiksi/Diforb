@@ -13,6 +13,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        margin-bottom: 10px;
 
         .price {
             float: right;
@@ -78,12 +79,12 @@
                     padding-left: 10px;
                 }
 
-                .icon-play-radial {
+                [class^=icon-] {
                     font-size: 40px;
                 }
             } 
 
-            .play, .icon-play-radial, .launch {
+            .play, [class^=icon-], .launch {
                 vertical-align: middle;
             }
         }
@@ -91,7 +92,14 @@
 
     .progress {
         height: 5px;
-        background-color: $colorGreen;
+        background-color: $colorGreenDark;
+
+        .range {
+            height: inherit;
+            width: 0;
+            background-color: $colorGreen;
+            pointer-events: none;
+        }
     }
 
     h3, figcaption, .launch {

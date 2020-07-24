@@ -14,7 +14,6 @@ export class SoundAnalizer {
         this.Analyser = this.Context.createAnalyser();
         this.Analyser.fftSize = 1024;
         this.Analyser.smoothingTimeConstant = 0.5;
-        this.ScriptProcessor = null;
         this.ScriptProcessor = this.Context.createScriptProcessor(1024, 2, 2);
         this.Analyser.connect(this.ScriptProcessor);
         this.ScriptProcessor.connect(this.Context.destination);

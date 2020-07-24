@@ -3,9 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AuthorizationRoutingModule } from './authorization-routing.module';
 
+import { AuthLayoutComponent } from './layout/auth.layout';
+import { StartComponent } from './start/start.component';
+
 
 @NgModule({
-    declarations: [],
+    declarations: [
+        AuthLayoutComponent,
+        StartComponent
+    ],
     imports: [
         CommonModule,
         AuthorizationRoutingModule

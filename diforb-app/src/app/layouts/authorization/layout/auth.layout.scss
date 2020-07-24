@@ -1,0 +1,93 @@
+@import 'variables';
+
+.video-responsive {
+    padding-bottom: 56.25%;
+    position: fixed;
+    width: 100%;
+}
+
+.canvas, .video, .shadow {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 5;
+}
+
+.shadow {
+    background-color: $bgroundBlack3;
+}
+
+header, main, footer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header, footer {
+    height: $heightHeader;
+
+    ul {
+        display: inherit;
+
+        li {
+            cursor: pointer;
+        }
+    }
+}
+
+main {
+    height: $heightContentWithFooter;
+}
+
+header {
+    background-color: $bgroundBlack2;
+    font-size: 14px;
+
+    div {
+        width: 100%;
+        max-width: $width-container-small;
+        display: inherit;
+
+        .parent {
+            position: relative;
+            margin-right: 30px;
+            text-transform: uppercase;
+
+            ul {
+                padding: 5px 20px;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: black;
+
+                li {
+                    white-space: nowrap;
+                }
+            }
+
+            &:hover {
+                ul {
+                    
+                }
+            }
+        }
+        
+    }
+}
+
+footer {
+    font-size: 20px;
+
+    li {
+        margin: 0 15px;
+    }
+}
+
+
+
+
+
